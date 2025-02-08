@@ -7,6 +7,10 @@ const navbar = () => {
         <div className="left">
           <img src="" alt="logo" />
         </div>
+
+        <div className='mid'>
+          some mid contennt
+        </div>
         <div className="right ">
           <button>Login</button>
           <button>Sign up</button>
