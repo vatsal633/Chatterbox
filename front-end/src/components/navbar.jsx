@@ -17,7 +17,8 @@ const navbar = () => {
             </div>
 
             <div className="right flex gap-1 ">
-                <button className='transition duration-[0s,0.5s] rounded-sm hover:bg-white hover:text-black bg-black text-white py-[11px] px-[38px]  cursor-pointer '>
+                <a href="/src/components/login.jsx"></a>
+                <button  className='transition duration-[0s,0.5s] rounded-sm hover:bg-white hover:text-black bg-black text-white py-[11px] px-[38px]  cursor-pointer '>
                     Log In
                 </button>
                 <button className='transition duration-[0s,0.5s] hover:bg-white hover:text-black rounded-sm bg-black text-white py-[11px] px-[38px] cursor-pointer'>Sign in</button>
