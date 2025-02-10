@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactlogo from './assets/react.svg'
 import vitelogo from '/vite.svg'
 import './App.css'
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 // componets
 import Navbar from './components/navbar'
@@ -14,17 +14,20 @@ function App() {
   const router = createBrowserRouter([
     {
       path:'/',
-      element:<Header/>
+      element:<><Navbar/><Header/></>
     },
     {
       path:'/login',
-      element:<Login/>
+      element:<><Navbar/><Login/></>
     }
   ])
   return (
     <>
-      <Navbar/>
-      <Header/>
+      <RouterProvider router={router}>
+   <Header/>
+   <Navbar/>
+
+      </RouterProvider>
     </>
   )
 }
