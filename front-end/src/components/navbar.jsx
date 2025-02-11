@@ -20,7 +20,10 @@ const navbar = () => {
                     <Link to='/courses'>
                     <div className='py-[12px] px-[16px] rounded-[6px] cursor-pointer text-[#ffffff] hover:inset-shadow-[0_0px_6px_0px_#ffffff]'>courses</div>
                     </Link>
+
+                    <Link to="/blog">
                     <div className='py-[12px] px-[16px] rounded-[6px] cursor-pointer text-[#ffffff] hover:inset-shadow-[0_0px_6px_0px_#ffffff]'>blogs</div>
+                    </Link>
 
                     <Link to='/aboutus'>
                     <div className='py-[12px] px-[16px] rounded-[6px] cursor-pointer text-[#ffffff] hover:inset-shadow-[0_0px_6px_0px_#ffffff]'>about us</div>
