@@ -6,27 +6,40 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 // componets
 import Navbar from './components/navbar'
-import Header from "./components/header"
+import Home from "./components/home"
 import Login from './components/login'
+import Signin from './components/signin'
+import navbar from './components/navbar'
+import AboutUs from './components/aboutus'
 
 function App() {
   const [count, setCount] = useState(0)
   const router = createBrowserRouter([
     {
       path:'/',
-      element:<><Navbar/><Header/></>
+      element:<><Navbar/><Home/></>
     },
     {
       path:'/login',
       element:<><Navbar/><Login/></>
+    },
+
+    {
+      path:'/signin',
+      element:<><Navbar/><Signin/></>
+    },
+
+    {
+      path:'/aboutus',
+      element:<><Navbar/><AboutUs/></>
     }
   ])
   return (
     <>
       <RouterProvider router={router}>
-   <Header/>
+   <Home/>
    <Navbar/>
-
+   
       </RouterProvider>
     </>
   )
