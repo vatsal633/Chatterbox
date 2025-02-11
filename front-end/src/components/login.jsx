@@ -51,7 +51,7 @@ const Login = () => {
         {/* Extra Options */}
         <div className="text-center mt-4">
           <span className="text-gray-400">Don't have an account? </span>
-          <Link to="/signup" className="text-[#00C6FF] hover:underline">
+          <Link to="/signin" className="text-[#00C6FF] hover:underline">
             Sign up
           </Link>
         </div>
