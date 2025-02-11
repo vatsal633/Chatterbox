@@ -16,7 +16,10 @@ const navbar = () => {
                     <Link to='/'>
                     <div className='py-[12px] px-[16px] rounded-[6px] cursor-pointer text-[#ffffff] hover:inset-shadow-[0_0px_6px_0px_#ffffff]'>home</div>
                     </Link>
+
+                    <Link to='/courses'>
                     <div className='py-[12px] px-[16px] rounded-[6px] cursor-pointer text-[#ffffff] hover:inset-shadow-[0_0px_6px_0px_#ffffff]'>courses</div>
+                    </Link>
                     <div className='py-[12px] px-[16px] rounded-[6px] cursor-pointer text-[#ffffff] hover:inset-shadow-[0_0px_6px_0px_#ffffff]'>blogs</div>
 
                     <Link to='/aboutus'>

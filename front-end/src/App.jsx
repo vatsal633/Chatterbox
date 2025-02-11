@@ -11,6 +11,7 @@ import Login from './components/login'
 import Signin from './components/signin'
 import navbar from './components/navbar'
 import AboutUs from './components/aboutus'
+import CoursePage from './components/courses'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -32,6 +33,10 @@ function App() {
     {
       path:'/aboutus',
       element:<><Navbar/><AboutUs/></>
+    },
+    {
+      path:'/courses',
+      element:<><Navbar/><CoursePage/></>
     }
   ])
   return (
