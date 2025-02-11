@@ -18,7 +18,10 @@ const navbar = () => {
                     </Link>
                     <div className='py-[12px] px-[16px] rounded-[6px] cursor-pointer text-[#ffffff] hover:inset-shadow-[0_0px_6px_0px_#ffffff]'>courses</div>
                     <div className='py-[12px] px-[16px] rounded-[6px] cursor-pointer text-[#ffffff] hover:inset-shadow-[0_0px_6px_0px_#ffffff]'>blogs</div>
+
+                    <Link to='/aboutus'>
                     <div className='py-[12px] px-[16px] rounded-[6px] cursor-pointer text-[#ffffff] hover:inset-shadow-[0_0px_6px_0px_#ffffff]'>about us</div>
+                    </Link>
                 </div>
 
                 <div className="right flex gap-1 ">
@@ -28,7 +31,9 @@ const navbar = () => {
                         </li>
                     </Link>
 
-                    <button className='transition duration-[0s,0.5s] hover:bg-white hover:text-black rounded-sm bg-black text-white py-[11px] px-[38px] cursor-pointer'>Sign in</button>
+                    <Link to='/signin'>  
+                    <li className='list-none transition duration-[0s,0.5s] hover:bg-white hover:text-black rounded-sm bg-black text-white py-[11px] px-[38px] cursor-pointer'>Sign in</li>
+                    </Link>
                 </div>
             </div>
         </>
