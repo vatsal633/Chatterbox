@@ -1,38 +1,63 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-const login = () => {
+import React from "react";
+import { Link } from "react-router-dom";
 
-  const onsubmitform = ()=>{
-    alert("form submited")
-  }
+const Login = () => {
+  const onsubmitform = (e) => {
+    e.preventDefault(); // Prevents page reload
+    alert("Form Submitted");
+  };
 
   return (
-    <>
-      <div className='wrapper flex min-h-[calc(100vh-64px)] justify-center items-center'>
-         <form action="" className='bg-gradient-to-r from-[#662D8C] to-[#ED1E79] w-[37%] rounded-[7px]'>
-            <div className="form-heading text-6xl text-white text-center">Login</div>
-            <div className='email-area flex justify-center  '>
-              <input type="email"  className='px-[12px] py-[11px] my-6 rounded-[7px] w-[72%] text-black bg-white' name="" id="" placeholder='enter the email'/>
-            </div>
-            <div className='password-area flex justify-center'>
-              <input type="password" className='px-[12px] py-[11px] rounded-[7px] w-[72%] text-black bg-white' name="" id="" placeholder='enter password'/>
-            </div>
+    <div className="wrapper flex min-h-screen justify-center items-center bg-black">
+      <form
+        onSubmit={onsubmitform}
+        className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] w-[37%] p-8 rounded-[10px] shadow-lg"
+      >
+        {/* Heading */}
+        <h2 className="text-4xl font-bold text-white text-center mb-6">
+          Login
+        </h2>
 
-            <div className="submitarea flex justify-center my-5">
-                <button type='submit' onClick={onsubmitform} className='transition duration-[0s,0.5s] bg-white text-black py-[11px] px-[38px] rounded-[7px] cursor-pointer'>Login</button>
-            </div>
+        {/* Email Input */}
+        <div className="flex justify-center">
+          <input
+            type="email"
+            className="px-4 py-3 w-[80%] bg-[#242424] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6FF] placeholder-gray-400"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
 
-            <div className="extra ">
-                <span className='text-black'>Already Have Any Account?</span>
-              <Link to='/signin' className='text-blue underline'>
-              Sign in
-              </Link>
-            </div>
-         </form>
-      </div>
+        {/* Password Input */}
+        <div className="flex justify-center mt-4">
+          <input
+            type="password"
+            className="px-4 py-3 w-[80%] bg-[#242424] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6FF] placeholder-gray-400"
+            placeholder="Enter password"
+            required
+          />
+        </div>
 
-    </>
-  )
-}
+        {/* Submit Button */}
+        <div className="flex justify-center mt-6">
+          <button
+            type="submit"
+            className="bg-[#00C6FF] text-black font-bold py-3 px-10 rounded-lg transition-all duration-300 hover:bg-[#FF9800] hover:text-white"
+          >
+            Login
+          </button>
+        </div>
 
-export default login
+        {/* Extra Options */}
+        <div className="text-center mt-4">
+          <span className="text-gray-400">Don't have an account? </span>
+          <Link to="/signup" className="text-[#00C6FF] hover:underline">
+            Sign up
+          </Link>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default Login;
