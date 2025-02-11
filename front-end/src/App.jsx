@@ -11,6 +11,7 @@ import Login from './components/login'
 import Signin from './components/signin'
 import navbar from './components/navbar'
 import AboutUs from './components/aboutus'
+import Blog from './components/blog'
 import CoursePage from './components/courses'
 
 function App() {
@@ -37,6 +38,11 @@ function App() {
     {
       path:'/courses',
       element:<><Navbar/><CoursePage/></>
+    },
+
+    {
+      path:"/blog",
+      element:<><Navbar/><Blog/></>
     }
   ])
   return (
