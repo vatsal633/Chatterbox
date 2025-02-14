@@ -1,10 +1,16 @@
+import {useState,useRef} from "react";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const [email, setemail] = useState("")
+  const [Password, setPassword] = useState("")
+  
+  // submit function 
   const onsubmitform = (e) => {
     e.preventDefault(); // Prevents page reload
-    alert("Form Submitted");
+    console.log(`email:${email}`)
+    console.log(`password:${Password}`)
   };
 
   return (
@@ -22,6 +28,7 @@ const Login = () => {
         <div className="flex justify-center">
           <input
             type="email"
+            onChange={(e)=>{setemail(e.target.value)}}
             className="px-4 py-3 w-[80%] bg-[#242424] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6FF] placeholder-gray-400"
             placeholder="Enter your email"
             required
@@ -32,6 +39,7 @@ const Login = () => {
         <div className="flex justify-center mt-4">
           <input
             type="password"
+            onChange={(e)=>{setPassword(e.target.value)}}
             className="px-4 py-3 w-[80%] bg-[#242424] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6FF] placeholder-gray-400"
             placeholder="Enter password"
             required
