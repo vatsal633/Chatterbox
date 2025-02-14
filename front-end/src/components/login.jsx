@@ -1,11 +1,13 @@
-import {useState,useRef} from "react";
+import { useState, useRef } from "react";
 import React from "react";
 import { Link } from "react-router-dom";
+import Google from "../assets/google.png"
+import Github from "../assets/github.png"
 
 const Login = () => {
   const [email, setemail] = useState("")
   const [Password, setPassword] = useState("")
-  
+
   // submit function 
   const onsubmitform = (e) => {
     e.preventDefault(); // Prevents page reload
@@ -28,7 +30,7 @@ const Login = () => {
         <div className="flex justify-center">
           <input
             type="email"
-            onChange={(e)=>{setemail(e.target.value)}}
+            onChange={(e) => { setemail(e.target.value) }}
             className="px-4 py-3 w-[80%] bg-[#242424] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6FF] placeholder-gray-400"
             placeholder="Enter your email"
             required
@@ -39,11 +41,33 @@ const Login = () => {
         <div className="flex justify-center mt-4">
           <input
             type="password"
-            onChange={(e)=>{setPassword(e.target.value)}}
+            onChange={
+              (e) => { setPassword(e.target.value) }
+            }
             className="px-4 py-3 w-[80%] bg-[#242424] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6FF] placeholder-gray-400"
             placeholder="Enter password"
             required
           />
+        </div>
+
+        {/* handles */}
+
+        <div className="flex items-center justify-center">
+          <div className="border-t w-1/3"></div>
+          <div className="px-2 text-gray-500">or</div>
+          <div className="border-t w-1/3"></div>
+        </div>
+
+        <div className="flex justify-around ">
+          <div className="cursor-pointer gap-2 items-center flex rounded-sm bg-white text-black py-[7px] px-[23px]">
+            <img src={Google} alt="" className="w-[26px]" />
+            <span>google</span>
+          </div>
+          <div className="cursor-pointer gap-2 flex items-center rounded-md bg-white text-black py-[7px] px-[23px]">
+          <img src={Github} alt="" className="w-[26px]" />
+
+            <span>github</span>
+          </div>
         </div>
 
         {/* Submit Button */}
