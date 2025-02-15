@@ -13,6 +13,7 @@ import navbar from './components/navbar'
 import AboutUs from './components/aboutus'
 import Blog from './components/blog'
 import CoursePage from './components/courses'
+import Dashboard from './pages/dashboard'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -43,6 +44,11 @@ function App() {
     {
       path:"/blog",
       element:<><Navbar/><Blog/></>
+    },
+
+    {
+      path:"/dashboard",
+      element:<><Navbar/><Dashboard/></>
     }
   ])
   return (

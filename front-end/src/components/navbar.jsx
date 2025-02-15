@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const navbar = () => {
     return (
         <>
-            <div className='navbar flex justify-between items-center shadow-md'>
+            <div className='navbar flex justify-between items-center shadow-md '>
                 <div className="left">
                     <img src={Logo} className="w-20" alt="" srcset="" />
 
@@ -27,6 +27,10 @@ const navbar = () => {
 
                     <Link to='/aboutus'>
                     <div className='py-[12px] px-[16px] rounded-[6px] cursor-pointer text-[#ffffff] hover:inset-shadow-[0_0px_6px_0px_#ffffff]'>about us</div>
+                    </Link>
+
+                    <Link to='/dashboard'>
+                    <div className='py-[12px] px-[16px] rounded-[6px] cursor-pointer text-[#ffffff] hover:inset-shadow-[0_0px_6px_0px_#ffffff]'>dashboard</div>
                     </Link>
                 </div>
 

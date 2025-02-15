@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 import Google from "../assets/google.png"
@@ -8,18 +8,35 @@ import Github from "../assets/github.png"
 const Signin = () => {
 
   // form elements states
-  const [username, setusername] = useState("")
-  const [email, setemail] = useState("")
-  const [repass, setrepass] = useState("")
-  const [Password, setPassword] = useState("")
+  const [error, setError] = useState(""); // For password mismatch error
 
 
+  // form elements refs 
+  const usernameref = useRef();
+  const emailref = useRef();
+  const passref = useRef();
+  const repassref =useRef()
+
+
+  // form submit function 
   const onSubmitForm = (e) => {
     e.preventDefault();
-    console.log(`username:${username}`)
-    console.log(`email:${email}`)
-    console.log(`password:${Password}`)
-    console.log(`re password:${repass}`)
+
+    const enteredUsername = usernameref.current.value;
+    const enteredEmail = emailref.current.value;
+    const enteredPassword = passref.current.value;
+    const enteredRepass = repassref.current.value;
+
+    console.log(`Username: ${enteredUsername}, Email: ${enteredEmail}, Password: ${enteredPassword}`);
+    console.log(`repass ${enteredRepass}`)
+
+
+    if(enteredPassword!==enteredRepass){
+      setError("password does not match")
+    }
+    else{
+      setError("")
+    }
   };
 
 
@@ -39,7 +56,7 @@ const Signin = () => {
         <div className="flex justify-center">
           <input
             type="text"
-            onChange={(e) => { setusername(e.target.value) }}
+            ref={usernameref}
             className="px-4 py-3 w-[80%] bg-[#242424] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6FF] placeholder-gray-400"
             placeholder="Enter your username"
             required
@@ -50,7 +67,7 @@ const Signin = () => {
         <div className="flex justify-center mt-4">
           <input
             type="email"
-            onChange={(e) => { setemail(e.target.value) }}
+            ref={emailref}
             className="px-4 py-3 w-[80%] bg-[#242424] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6FF] placeholder-gray-400"
             placeholder="Enter your email"
             required
@@ -61,7 +78,7 @@ const Signin = () => {
         <div className="flex justify-center mt-4">
           <input
             type="password"
-            onChange={(e) => { setPassword(e.target.value) }}
+            ref={passref}
             className="px-4 py-3 w-[80%] bg-[#242424] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6FF] placeholder-gray-400"
             placeholder="Enter password"
             required
@@ -69,15 +86,19 @@ const Signin = () => {
         </div>
 
         {/* Re-enter Password */}
-        <div className="flex justify-center mt-4">
+        <div className="flex  justify-center mt-4">
           <input
             type="password"
-            onChange={(e) => { setrepass(e.target.value) }}
+            ref={repassref}
             className="px-4 py-3 w-[80%] bg-[#242424] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6FF] placeholder-gray-400"
             placeholder="Re-enter password"
             required
           />
         </div>
+
+        {error && <div className="text-red-400 w-[80%] text-sm m-auto mt-2">{error}</div>}
+
+
 
         <div className="flex items-center justify-center">
           <div className="border-t w-1/3"></div>

@@ -8,12 +8,26 @@ const Login = () => {
   const [email, setemail] = useState("")
   const [Password, setPassword] = useState("")
 
+  const emailref = useRef()
+  const passref = useRef()
+
+
   // submit function 
   const onsubmitform = (e) => {
-    e.preventDefault(); // Prevents page reload
-    console.log(`email:${email}`)
-    console.log(`password:${Password}`)
+    e.preventDefault(); // Prevent page reload
+  
+    // Getting values from refs
+    let email_data = emailref.current.value;
+    let pass_data = passref.current.value;
+  
+    // Updating state
+    setemail(email_data);
+    setPassword(pass_data);
+  
+    // Logging after state update using useEffect
+    console.log(`Submitted email: ${email_data}, password: ${pass_data}`);
   };
+   
 
   return (
     <div className="wrapper flex min-h-screen justify-center items-center bg-black">
@@ -30,7 +44,7 @@ const Login = () => {
         <div className="flex justify-center">
           <input
             type="email"
-            onChange={(e) => { setemail(e.target.value) }}
+            ref={emailref}
             className="px-4 py-3 w-[80%] bg-[#242424] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6FF] placeholder-gray-400"
             placeholder="Enter your email"
             required
@@ -41,9 +55,7 @@ const Login = () => {
         <div className="flex justify-center mt-4">
           <input
             type="password"
-            onChange={
-              (e) => { setPassword(e.target.value) }
-            }
+            ref={passref}
             className="px-4 py-3 w-[80%] bg-[#242424] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6FF] placeholder-gray-400"
             placeholder="Enter password"
             required
@@ -74,7 +86,7 @@ const Login = () => {
         <div className="flex justify-center mt-6">
           <button
             type="submit"
-            className="bg-[#00C6FF] text-black font-bold py-3 px-10 rounded-lg transition-all duration-300 hover:bg-[#FF9800] hover:text-white"
+            className="bg-[#00C6FF] text-black font-bold py-3 px-10 rounded-lg transition-all duration-300 hover:bg-[#FF9800] hover:text-white cursor-pointer"
           >
             Login
           </button>
