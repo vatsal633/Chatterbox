@@ -42,7 +42,7 @@ const dashboard = () => {
           <h1 className="text-3xl font-bold">Welcome, User!</h1>
           <p className="text-gray-400 mt-2">Track your progress and continue learning.</p>
 
-          {/* Cards Section */}
+          {/* Cards Section start*/}
           <div className="grid md:grid-cols-3 gap-6 mt-6">
 
             {/* cards */}
@@ -65,6 +65,10 @@ const dashboard = () => {
               <p className="text-gray-400 mt-2">Solved 3 challenges today</p>
             </div>
             
+          </div>
+          {/* cards section end */}
+          <div className='states'>
+          user statistics
           </div>
         </main>
         {/* main dashboard end */}
