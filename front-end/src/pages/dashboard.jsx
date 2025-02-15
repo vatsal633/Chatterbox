@@ -44,12 +44,15 @@ const dashboard = () => {
 
           {/* Cards Section */}
           <div className="grid md:grid-cols-3 gap-6 mt-6">
+
+            {/* cards */}
             <div className=" bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] p-6 rounded-lg shadow-lg">
-              <h2 className="text-xl font-semibold">📈 Progress</h2>
-              <p className="text-gray-400 mt-2">85% completed</p>
-              <div className="w-full bg-gray-700 h-2 rounded-full mt-3">
-                <div className="bg-blue-500 h-2 rounded-full" style={{ width: "85%" }}></div>
-              </div>
+              <h2 className="text-xl font-semibold">C Language</h2>
+              <p className="text-gray-400 mt-2">Loops & Control statement </p>
+              
+              <button className='bg-[#00c6ff] py-[8px] px-[12px] rounded-[7px] mt-[7px] hover:bg-[#FF9800] cursor-pointer'>
+              Countinue practice
+              </button>
             </div>
 
             <div className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] bg-gray-800 p-6 rounded-lg shadow-lg">
@@ -61,6 +64,7 @@ const dashboard = () => {
               <h2 className="text-xl font-semibold">📝 Recent Activity</h2>
               <p className="text-gray-400 mt-2">Solved 3 challenges today</p>
             </div>
+            
           </div>
         </main>
         {/* main dashboard end */}
