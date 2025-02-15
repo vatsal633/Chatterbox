@@ -30,36 +30,39 @@ const dashboard = () => {
               <p>log out</p>
             </Link>
           </nav>
+          <div className='absolute text-gray-400 bottom-0'>
+            @CodeQuest
+          </div>
           {/* dashboard nav section end */}
         </div>
         {/* aside area and navbar ends  */}
 
         {/* main dashboard start*/}
         <main className="flex-1 p-8">
-        <h1 className="text-3xl font-bold">Welcome, User!</h1>
-        <p className="text-gray-400 mt-2">Track your progress and continue learning.</p>
+          <h1 className="text-3xl font-bold">Welcome, User!</h1>
+          <p className="text-gray-400 mt-2">Track your progress and continue learning.</p>
 
-        {/* Cards Section */}
-        <div className="grid md:grid-cols-3 gap-6 mt-6">
-          <div className=" bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] p-6 rounded-lg shadow-lg">
-            <h2 className="text-xl font-semibold">📈 Progress</h2>
-            <p className="text-gray-400 mt-2">85% completed</p>
-            <div className="w-full bg-gray-700 h-2 rounded-full mt-3">
-              <div className="bg-blue-500 h-2 rounded-full" style={{ width: "85%" }}></div>
+          {/* Cards Section */}
+          <div className="grid md:grid-cols-3 gap-6 mt-6">
+            <div className=" bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] p-6 rounded-lg shadow-lg">
+              <h2 className="text-xl font-semibold">📈 Progress</h2>
+              <p className="text-gray-400 mt-2">85% completed</p>
+              <div className="w-full bg-gray-700 h-2 rounded-full mt-3">
+                <div className="bg-blue-500 h-2 rounded-full" style={{ width: "85%" }}></div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] bg-gray-800 p-6 rounded-lg shadow-lg">
+              <h2 className="text-xl font-semibold">📚 Courses</h2>
+              <p className="text-gray-400 mt-2">5 courses enrolled</p>
+            </div>
+
+            <div className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] bg-gray-800 p-6 rounded-lg shadow-lg">
+              <h2 className="text-xl font-semibold">📝 Recent Activity</h2>
+              <p className="text-gray-400 mt-2">Solved 3 challenges today</p>
             </div>
           </div>
-
-          <div className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] bg-gray-800 p-6 rounded-lg shadow-lg">
-            <h2 className="text-xl font-semibold">📚 Courses</h2>
-            <p className="text-gray-400 mt-2">5 courses enrolled</p>
-          </div>
-
-          <div className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] bg-gray-800 p-6 rounded-lg shadow-lg">
-            <h2 className="text-xl font-semibold">📝 Recent Activity</h2>
-            <p className="text-gray-400 mt-2">Solved 3 challenges today</p>
-          </div>
-        </div>
-      </main>
+        </main>
         {/* main dashboard end */}
       </div>
     </>
