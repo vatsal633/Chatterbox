@@ -49,9 +49,9 @@ const dashboard = () => {
             <div className=" bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] p-6 rounded-lg shadow-lg">
               <h2 className="text-xl font-semibold">C Language</h2>
               <p className="text-gray-400 mt-2">Loops & Control statement </p>
-              
+
               <button className='bg-[#00c6ff] py-[8px] px-[12px] rounded-[7px] mt-[7px] hover:bg-[#FF9800] cursor-pointer'>
-              Countinue practice
+                Countinue practice
               </button>
             </div>
 
@@ -64,12 +64,45 @@ const dashboard = () => {
               <h2 className="text-xl font-semibold">📝 Recent Activity</h2>
               <p className="text-gray-400 mt-2">Solved 3 challenges today</p>
             </div>
-            
+
           </div>
           {/* cards section end */}
-          <div className='states'>
-          user statistics
+          {/* User Statistics Section */}
+          <div className="mt-10 bg-gray-900 p-6 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-bold text-white">📊 User Statistics</h2>
+            <p className="text-gray-400">Your progress at a glance</p>
+
+            <div className="grid md:grid-cols-4 gap-6 mt-4">
+              {/* Total Solved Questions */}
+              <div className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] p-4 rounded-lg text-center shadow-md">
+                <h3 className="text-xl font-semibold text-white">✅ Solved</h3>
+                <p className="text-4xl font-bold text-[#00c6ff]">120</p>
+              </div>
+
+              {/* Total Attempted */}
+              <div className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] p-4 rounded-lg text-center shadow-md">
+                <h3 className="text-xl font-semibold text-white">🔄 Attempted</h3>
+                <p className="text-4xl font-bold text-[#FF9800]">150</p>
+              </div>
+
+              {/* Success Rate */}
+              <div className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] p-4 rounded-lg text-center shadow-md">
+                <h3 className="text-xl font-semibold text-white">📈 Success Rate</h3>
+                <div className="relative w-full bg-gray-700 h-4 rounded-full mt-2">
+                  <div className="absolute top-0 left-0 h-4 bg-[#00c6ff] rounded-full" style={{ width: "80%" }}></div>
+                </div>
+                <p className="text-sm text-gray-400 mt-1">80% correct</p>
+              </div>
+
+              {/* Streak */}
+              <div className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] p-4 rounded-lg text-center shadow-md">
+                <h3 className="text-xl font-semibold text-white">🔥 Streak</h3>
+                <p className="text-4xl font-bold text-red-500">7</p>
+                <p className="text-sm text-gray-400">Days active</p>
+              </div>
+            </div>
           </div>
+
         </main>
         {/* main dashboard end */}
       </div>
