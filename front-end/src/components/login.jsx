@@ -1,33 +1,35 @@
-import { useState, useRef } from "react";
-import React from "react";
-import { Link, UNSAFE_createClientRoutesWithHMRRevalidationOptOut } from "react-router-dom";
+import { useState, useRef } from "react"
+import React from "react"
+import { Link } from "react-router-dom"
 import Google from "../assets/google.png"
 import Github from "../assets/github.png"
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
-  const emailRef = useRef();
-  const passRef = useRef();
+  const emailRef = useRef()
+  const passRef = useRef()
 
   const onsubmitform = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    let emailData = emailRef.current.value;
-    let passData = passRef.current.value;
+    let emailData = emailRef.current.value
+    let passData = passRef.current.value
 
     // Fetch stored user data
-    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedUser = JSON.parse(localStorage.getItem("user"))
 
     if (storedUser && storedUser.email === emailData && storedUser.password === passData) {
-      localStorage.setItem("isLoggedIn", "true"); // ✅ Save login state
-      alert("Login Successful!");
-      window.location.href = "/dashboard"; // 🔄 Redirect after login
+      localStorage.setItem("isLoggedIn", "true")
+      alert("Login Successful!")
+      emailRef.current.value = " "
+      passRef.current.value = " "
+      window.location.href = "/dashboard" 
     } else {
-      alert("Invalid email or password");
+      alert("Invalid email or password")
     }
-  };
+  }
    
 
   return (
@@ -102,7 +104,7 @@ const Login = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

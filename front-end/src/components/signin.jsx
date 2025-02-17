@@ -32,7 +32,7 @@ const Signin = () => {
     const enteredRepass = repassref.current.value;
 
 
-    localStorage.setItem(usernameref,JSON.stringify({
+    localStorage.setItem(enteredUsername,JSON.stringify({
       username : enteredUsername,
       email:enteredEmail,
       password : enteredPassword
