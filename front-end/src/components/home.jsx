@@ -4,6 +4,28 @@ import practiceimg from '../assets/home-image.png';
 import RightImg from '../assets/code.jpg';
 
 const Home = () => {
+  // dumy 
+  const testimonials = [
+    {
+      name: "John Doe",
+      role: "Software Engineer",
+      image: "https://randomuser.me/api/portraits/men/32.jpg",
+      text: "CodeQuest made my coding journey so much easier. The AI-generated questions are spot on!",
+    },
+    {
+      name: "Jane Smith",
+      role: "Full-Stack Developer",
+      image: "https://randomuser.me/api/portraits/women/44.jpg",
+      text: "I love the real-time coding feature! It's like having a coding mentor at all times.",
+    },
+    {
+      name: "David Brown",
+      role: "AI Researcher",
+      image: "https://randomuser.me/api/portraits/men/47.jpg",
+      text: "The AI-generated challenges are super adaptive! It really pushes me to improve.",
+    },
+  ];
+
   return (
     <>
       {/* Hero Section */}
@@ -26,7 +48,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Explore Skills Section */}
+      {/* Explore Skills Section start*/}
       <div className="flex flex-col md:flex-row items-center bg-white w-11/12 mx-auto p-12 my-11 rounded-2xl shadow-lg">
         {/* Text Section */}
         <div className="md:w-1/2 p-6">
@@ -47,6 +69,59 @@ const Home = () => {
           <img src={RightImg} alt="Code" className="rounded-lg shadow-md" loading="lazy" />
         </div>
       </div>
+
+      {/* explore skill section end */}
+
+
+      {/* testimonials section start */}
+      <section className="bg-[#1a1a1d] py-16 text-white">
+        <div className="max-w-5xl mx-auto text-center px-6">
+          <h2 className="text-4xl font-bold text-teal-400 mb-8">What Users Say</h2>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="bg-[#29292e] p-6 rounded-lg shadow-lg hover:scale-105 transition transform">
+                <img
+                  src={testimonial.image}
+                  alt={testimonial.name}
+                  className="w-16 h-16 rounded-full mx-auto mb-4 border-2 border-teal-400"
+                />
+                <p className="text-gray-300 italic">"{testimonial.text}"</p>
+                <h4 className="mt-4 text-xl font-semibold text-teal-300">{testimonial.name}</h4>
+                <p className="text-gray-400 text-sm">{testimonial.role}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* testimonial section end */}
+
+
+      {/* Topics List Section */}
+      <div className="w-11/12 mx-auto my-12 p-10 bg-gradient-to-r from-[#1a1a1d] to-[#222226] text-white rounded-2xl shadow-lg">
+        <h2 className="text-4xl font-bold text-center mb-8 text-[#44d1d1]">
+          Master Programming Languages & Frameworks
+        </h2>
+
+        <p className="text-lg text-gray-300 text-center mb-6">
+          Strengthen your coding skills in various programming languages & Frameworks and become a pro!
+        </p>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {["C", "C++", "Java", "Python","Javascript","PHP","Node.js","React"].map((topic, index) => (
+            <div
+              key={index}
+              className="p-6 cursor-pointer bg-[#2b2b2f] rounded-xl shadow-md text-center font-bold text-xl text-gray-200 transition-transform hover:scale-105 hover:text-teal-400"
+            >
+              {topic}
+            </div>
+          ))}
+        </div>
+      </div>
+
+
+
+
     </>
   );
 };
