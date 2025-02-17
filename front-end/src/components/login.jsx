@@ -1,31 +1,32 @@
 import { useState, useRef } from "react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, UNSAFE_createClientRoutesWithHMRRevalidationOptOut } from "react-router-dom";
 import Google from "../assets/google.png"
 import Github from "../assets/github.png"
 
 const Login = () => {
-  const [email, setemail] = useState("")
-  const [Password, setPassword] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const emailref = useRef()
-  const passref = useRef()
+  const emailRef = useRef();
+  const passRef = useRef();
 
-
-  // submit function 
   const onsubmitform = (e) => {
-    e.preventDefault(); // Prevent page reload
-  
-    // Getting values from refs
-    let email_data = emailref.current.value;
-    let pass_data = passref.current.value;
-  
-    // Updating state
-    setemail(email_data);
-    setPassword(pass_data);
-  
-    // Logging after state update using useEffect
-    console.log(`Submitted email: ${email_data}, password: ${pass_data}`);
+    e.preventDefault();
+
+    let emailData = emailRef.current.value;
+    let passData = passRef.current.value;
+
+    // Fetch stored user data
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (storedUser && storedUser.email === emailData && storedUser.password === passData) {
+      localStorage.setItem("isLoggedIn", "true"); // ✅ Save login state
+      alert("Login Successful!");
+      window.location.href = "/dashboard"; // 🔄 Redirect after login
+    } else {
+      alert("Invalid email or password");
+    }
   };
    
 
@@ -44,7 +45,7 @@ const Login = () => {
         <div className="flex justify-center">
           <input
             type="email"
-            ref={emailref}
+            ref={emailRef}
             className="px-4 py-3 w-[80%] bg-[#242424] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6FF] placeholder-gray-400"
             placeholder="Enter your email"
             required
@@ -55,7 +56,7 @@ const Login = () => {
         <div className="flex justify-center mt-4">
           <input
             type="password"
-            ref={passref}
+            ref={passRef}
             className="px-4 py-3 w-[80%] bg-[#242424] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6FF] placeholder-gray-400"
             placeholder="Enter password"
             required

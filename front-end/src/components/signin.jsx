@@ -20,15 +20,23 @@ const Signin = () => {
 
   // form submit function 
   const onSubmitForm = (e) => {
+
+  
     e.preventDefault();
+
+  
 
     const enteredUsername = usernameref.current.value;
     const enteredEmail = emailref.current.value;
     const enteredPassword = passref.current.value;
     const enteredRepass = repassref.current.value;
 
-    console.log(`Username: ${enteredUsername}, Email: ${enteredEmail}, Password: ${enteredPassword}`);
-    console.log(`repass ${enteredRepass}`)
+
+    localStorage.setItem(usernameref,JSON.stringify({
+      username : enteredUsername,
+      email:enteredEmail,
+      password : enteredPassword
+    }))
 
 
     if(enteredPassword!==enteredRepass){
