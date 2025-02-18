@@ -8,10 +8,26 @@ const ForgetPass = () => {
 
     const [Email, setEmail] = useState("")
     const mail_ref = useRef()
+    const username_ref = useRef()
 
     const handleSendCode=()=>{
-        let Entered_mail = mail_ref.current.value
-        const stored_email = JSON.parse(localStorage.getItem())
+        let Entered_mail = mail_ref.current.value.trim()
+        let Entered_username = username_ref.current.value.trim()
+
+        const storded_data = JSON.parse(localStorage.getItem(Entered_username))
+
+        if(!storded_data){
+            console.log("username not found")
+        }
+
+        if(Entered_mail === storded_data.email ){
+            console.log("Email matches. Sending code...");
+        }
+
+        else{
+            console.log("Entered email does not match stored email.");
+
+        }
     }
 
 
@@ -27,6 +43,15 @@ const ForgetPass = () => {
                 </p>
 
                 {/* Input Field */}
+                <div className='relative'>
+                    <input
+                        type="text"
+                        ref={username_ref}
+                        placeholder='Enter your username'
+                        className='w-full bg-transparent text-white placeholder-gray-500 border-b-2 border-gray-600 focus:outline-none focus:border-teal-400 px-4 py-2 text-lg transition-all duration-300 my-4'
+                    />
+                </div>
+
                 <div className='relative'>
                     <input
                         type="email"
