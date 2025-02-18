@@ -15,6 +15,7 @@ import Blog from './components/blog'
 import CoursePage from './components/courses'
 import Dashboard from './pages/dashboard'
 import Footer from './components/footer'
+import Forget_pass from "./pages/forget_pass"
 
 function App() {
   const [count, setCount] = useState(0)
@@ -50,6 +51,11 @@ function App() {
     {
       path:"/dashboard",
       element:<><Dashboard/><Footer/></>
+    },
+
+    {
+      path:'/forgerpass',
+      element:<><Forget_pass/></>
     }
   ])
   return (

@@ -20,12 +20,7 @@ const Signin = () => {
 
   // form submit function 
   const onSubmitForm = (e) => {
-
-  
     e.preventDefault();
-
-  
-
     const enteredUsername = usernameref.current.value;
     const enteredEmail = emailref.current.value;
     const enteredPassword = passref.current.value;

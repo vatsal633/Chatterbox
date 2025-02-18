@@ -81,7 +81,9 @@ const Login = () => {
         </div>
 
         <div className="w-[78%] mt-4 m-auto">
+          <Link to="/forgerpass">
           <span className="text-[#00C6FF] ">Forget password?</span>
+          </Link>
         </div>
 
        {/* or */}
