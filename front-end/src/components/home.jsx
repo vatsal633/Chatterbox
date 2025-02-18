@@ -122,7 +122,7 @@ const Home = () => {
 
 
       {/*demo dashboard start */}
-      <div className='w-11/12 m-auto gap-3 flex items-center justify-between bg-gradient-to-r from-[#1a1a1d] to-[#222226] my-12 p-10 rounded-2xl shadow-2xl'>
+      <div className='w-11/12 m-auto gap-3 flex items-center justify-between bg-gradient-to-r from-[#1a1a1d] to-[#222226] my-12 p-10 rounded-2xl shadow-2xl flex-col min-[1129px]:flex-row'>
           {/* text section */}
           <div className='text-section'>
             <h1 className='text-4xl font-bold text-center mb-8 text-[#44d1d1]'>Track Your Progress With Dashboard</h1>

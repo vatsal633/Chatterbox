@@ -26,7 +26,6 @@ const Login = () => {
 
     if (storedUser && storedUser.email === emailData && storedUser.password === passData) {
       localStorage.setItem("isLoggedIn", "true")
-      alert("Login Successful!")
       emailRef.current.value = ""
       passRef.current.value = ""
       navigate('/dashboard',{ state: { username: userData }})
