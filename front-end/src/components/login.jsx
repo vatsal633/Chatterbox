@@ -21,7 +21,7 @@ const Login = () => {
     let passData = passRef.current.value
     let userData = userRef.current.value
 
-    // Fetch stored user data
+    // Fetch stored user data from localstorage
     const storedUser = JSON.parse(localStorage.getItem(userData))
 
     if (storedUser && storedUser.email === emailData && storedUser.password === passData) {
