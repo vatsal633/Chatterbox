@@ -14,41 +14,42 @@ import AboutUs from './components/aboutus'
 import Blog from './components/blog'
 import CoursePage from './components/courses'
 import Dashboard from './pages/dashboard'
+import Footer from './components/footer'
 
 function App() {
   const [count, setCount] = useState(0)
   const router = createBrowserRouter([
     {
       path:'/',
-      element:<><Navbar/><Home/></>
+      element:<><Navbar/><Home/><Footer/></>
     },
     {
       path:'/login',
-      element:<><Navbar/><Login/></>
+      element:<><Navbar/><Login/><Footer/></>
     },
 
     {
       path:'/signin',
-      element:<><Navbar/><Signin/></>
+      element:<><Navbar/><Signin/><Footer/></>
     },
 
     {
       path:'/aboutus',
-      element:<><Navbar/><AboutUs/></>
+      element:<><Navbar/><AboutUs/><Footer/></>
     },
     {
       path:'/courses',
-      element:<><Navbar/><CoursePage/></>
+      element:<><Navbar/><CoursePage/><Footer/></>
     },
 
     {
       path:"/blog",
-      element:<><Navbar/><Blog/></>
+      element:<><Navbar/><Blog/><Footer/></>
     },
 
     {
       path:"/dashboard",
-      element:<><Navbar/><Dashboard/></>
+      element:<><Navbar/><Dashboard/><Footer/></>
     }
   ])
   return (
@@ -56,6 +57,7 @@ function App() {
       <RouterProvider router={router}>
    <Home/>
    <Navbar/>
+   <Footer/>
    
       </RouterProvider>
     </>

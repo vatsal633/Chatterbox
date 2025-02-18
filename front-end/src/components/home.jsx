@@ -4,7 +4,7 @@ import practiceimg from '../assets/home-image.png';
 import RightImg from '../assets/code.jpg';
 
 const Home = () => {
-  // dumy 
+  // dumy testimonials
   const testimonials = [
     {
       name: "John Doe",
@@ -97,7 +97,7 @@ const Home = () => {
       {/* testimonial section end */}
 
 
-      {/* Topics List Section */}
+      {/* Topics List Section start*/}
       <div className="w-11/12 mx-auto my-12 p-10 bg-gradient-to-r from-[#1a1a1d] to-[#222226] text-white rounded-2xl shadow-lg">
         <h2 className="text-4xl font-bold text-center mb-8 text-[#44d1d1]">
           Master Programming Languages & Frameworks
@@ -108,7 +108,7 @@ const Home = () => {
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {["C", "C++", "Java", "Python","Javascript","PHP","Node.js","React"].map((topic, index) => (
+          {["C", "C++", "Java", "Python", "Javascript", "PHP", "Node.js", "React"].map((topic, index) => (
             <div
               key={index}
               className="p-6 cursor-pointer bg-[#2b2b2f] rounded-xl shadow-md text-center font-bold text-xl text-gray-200 transition-transform hover:scale-105 hover:text-teal-400"
@@ -118,9 +118,24 @@ const Home = () => {
           ))}
         </div>
       </div>
+      {/* Topics List Section end*/}
 
 
+      {/*demo dashboard start */}
+      <div className='w-11/12 m-auto gap-3 flex items-center justify-between bg-gradient-to-r from-[#1a1a1d] to-[#222226] my-12 p-10 rounded-2xl shadow-2xl'>
+          {/* text section */}
+          <div className='text-section'>
+            <h1 className='text-4xl font-bold text-center mb-8 text-[#44d1d1]'>Track Your Progress With Dashboard</h1>
+            <p>The Track Your Progress dashboard in CodeQuest provides an interactive and visual way to monitor your coding journey. It helps users stay motivated and improve by offering insights into their problem-solving performance.</p>
+          </div>
 
+
+          {/*image section*/}
+          <div className="image-section">
+            <img src={RightImg} alt="" />
+          </div>
+      </div>
+      {/*demo dashboard end */}
 
     </>
   );
