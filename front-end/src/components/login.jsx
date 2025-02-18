@@ -1,6 +1,6 @@
 import { useState, useRef } from "react"
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate  } from "react-router-dom"
 import Google from "../assets/google.png"
 import Github from "../assets/github.png"
 
@@ -10,22 +10,26 @@ const Login = () => {
 
   const emailRef = useRef()
   const passRef = useRef()
+  const userRef = useRef()
+
+  const navigate = useNavigate();
 
   const onsubmitform = (e) => {
     e.preventDefault()
 
     let emailData = emailRef.current.value
     let passData = passRef.current.value
+    let userData = userRef.current.value
 
     // Fetch stored user data
-    const storedUser = JSON.parse(localStorage.getItem("user"))
+    const storedUser = JSON.parse(localStorage.getItem(userData))
 
     if (storedUser && storedUser.email === emailData && storedUser.password === passData) {
       localStorage.setItem("isLoggedIn", "true")
       alert("Login Successful!")
-      emailRef.current.value = " "
-      passRef.current.value = " "
-      window.location.href = "/dashboard" 
+      emailRef.current.value = ""
+      passRef.current.value = ""
+      navigate('/dashboard',{ state: { username: userData }})
     } else {
       alert("Invalid email or password")
     }
@@ -42,6 +46,18 @@ const Login = () => {
         <h2 className="text-4xl font-bold text-white text-center mb-6">
           Login
         </h2>
+
+        {/* username */}
+
+        <div className="flex justify-center mb-4">
+          <input
+            type="text"
+            ref={userRef}
+            className="px-4 py-3 w-[80%] bg-[#242424] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00C6FF] placeholder-gray-400"
+            placeholder="Enter your username"
+            required
+          />
+        </div>
 
         {/* Email Input */}
         <div className="flex justify-center">
@@ -65,14 +81,17 @@ const Login = () => {
           />
         </div>
 
-        {/* handles */}
+        <div className="w-[78%] mt-4 m-auto">
+          <span className="text-[#00C6FF] ">Forget password?</span>
+        </div>
 
+       {/* or */}
         <div className="flex items-center justify-center">
           <div className="border-t w-1/3"></div>
           <div className="px-2 text-gray-500">or</div>
           <div className="border-t w-1/3"></div>
         </div>
-
+        {/* handles */}
         <div className="flex justify-around ">
           <div className="cursor-pointer gap-2 items-center flex rounded-sm bg-white text-black py-[7px] px-[23px]">
             <img src={Google} alt="" className="w-[26px]" />

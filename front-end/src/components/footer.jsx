@@ -1,4 +1,5 @@
 import { FaFacebookF, FaTwitter, FaInstagram, FaGithub } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const footer = () => {
   return (
@@ -15,10 +16,18 @@ const footer = () => {
 
           {/* Quick Links */}
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-gray-400 hover:text-[#00C6FF]">Home</a>
-            <a href="#" className="text-gray-400 hover:text-[#00C6FF]">About</a>
-            <a href="#" className="text-gray-400 hover:text-[#00C6FF]">Services</a>
-            <a href="#" className="text-gray-400 hover:text-[#00C6FF]">Contact</a>
+            <Link to="/">
+            <span href="#" className="text-gray-400 hover:text-[#00C6FF] cursor-pointer">Home</span>
+            </Link>
+            <Link to="/aboutus">
+            <span href="#" className="text-gray-400 hover:text-[#00C6FF] cursor-pointer">About</span>
+            </Link>
+            <Link to="/blog">
+            <span href="#" className="text-gray-400 hover:text-[#00C6FF] cursor-pointer">Blog</span>
+            </Link>
+            <Link to="/courses">
+            <span href="#" className="text-gray-400 hover:text-[#00C6FF] cursor-pointer">Courses</span>
+            </Link>
           </div>
 
           {/* Social Media Icons */}

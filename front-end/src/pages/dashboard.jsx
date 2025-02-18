@@ -1,9 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaUserCircle, FaTasks, FaChartLine, FaSignOutAlt } from "react-icons/fa";
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 
 const dashboard = () => {
+  const location = useLocation();
+  const user_name = location.state?.username || "Guest"
+  const [Username, setUsername] = useState("")
+
+
+  useEffect(() => {
+    
+    for (let key in localStorage) {
+      if (localStorage.hasOwnProperty(key) && key === user_name) {
+        const userData = JSON.parse(localStorage.getItem(key));
+  
+      
+        if (userData.username) {
+          setUsername(key);
+          break;
+        }
+      }
+    }
+  }, [user_name]);
+
   return (
     <>
       <div className='flex min-h-screen bg-black text-white'>
@@ -39,7 +59,7 @@ const dashboard = () => {
 
         {/* main dashboard start*/}
         <main className="flex-1 p-8">
-          <h1 className="text-3xl font-bold">Welcome, User!</h1>
+          <h1 className="text-3xl font-bold">Welcome, {Username}</h1>
           <p className="text-gray-400 mt-2">Track your progress and continue learning.</p>
 
           {/* Cards Section start*/}

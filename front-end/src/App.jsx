@@ -49,7 +49,7 @@ function App() {
 
     {
       path:"/dashboard",
-      element:<><Navbar/><Dashboard/><Footer/></>
+      element:<><Dashboard/><Footer/></>
     }
   ])
   return (
