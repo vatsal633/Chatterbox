@@ -15,6 +15,8 @@ import CoursePage from './pages/courses'
 import Dashboard from './pages/dashboard'
 import Footer from './components/footer'
 import Forget_pass from "./pages/forget_pass"
+import Change_password from './pages/change_password'
+import Settings from './pages/settings'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -55,6 +57,10 @@ function App() {
     {
       path:'/forgerpass',
       element:<><Forget_pass/></>
+    },
+    {
+      path:'/settings',
+      element:<><Settings/></>
     }
   ])
   return (

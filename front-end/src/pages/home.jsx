@@ -58,9 +58,10 @@ const Home = () => {
             Access the content you need to develop new skills – and land your dream job.
           </p>
           <Link to="/signin">
-            <button className="bg-teal-500 text-white py-3 px-6 rounded-lg shadow-md hover:bg-teal-600 transition">
-              Start Now
+            <button className="px-6 py-3 bg-gradient-to-r from-blue-500 to-teal-400 text-white font-semibold rounded-xl shadow-md hover:scale-105 hover:shadow-lg transition-transform duration-200">
+              Get Started →
             </button>
+
           </Link>
         </div>
 
@@ -123,17 +124,21 @@ const Home = () => {
 
       {/*demo dashboard start */}
       <div className='w-11/12 m-auto gap-3 flex items-center justify-between bg-gradient-to-r from-[#1a1a1d] to-[#222226] my-12 p-10 rounded-2xl shadow-2xl flex-col min-[1129px]:flex-row'>
-          {/* text section */}
-          <div className='text-section'>
-            <h1 className='text-4xl font-bold text-center mb-8 text-[#44d1d1]'>Track Your Progress With Dashboard</h1>
-            <p>The Track Your Progress dashboard in CodeQuest provides an interactive and visual way to monitor your coding journey. It helps users stay motivated and improve by offering insights into their problem-solving performance.</p>
-          </div>
+        {/* text section */}
+        <div className='text-section'>
+          <h1 className='text-4xl font-bold text-center mb-8 text-[#44d1d1]'>Track Your Progress With Dashboard</h1>
+          <p>The Track Your Progress dashboard in CodeQuest provides an interactive and visual way to monitor your coding journey. It helps users stay motivated and improve by offering insights into their problem-solving performance.</p>
+          <button className="px-6 py-3 border-2 border-teal-400 text-teal-400 font-semibold rounded-xl hover:bg-teal-400 hover:text-white transition">
+            Explore Topics
+          </button>
+
+        </div>
 
 
-          {/*image section*/}
-          <div className="image-section">
-            <img src={RightImg} alt="" />
-          </div>
+        {/*image section*/}
+        <div className="image-section">
+          <img src={RightImg} alt="" />
+        </div>
       </div>
       {/*demo dashboard end */}
 

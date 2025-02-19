@@ -3,6 +3,8 @@ import Button from '../components/button';
 import { Link } from "react-router-dom"
 import { useState, useEffect, useRef } from 'react';
 import button from '../components/button';
+import Change_password from './change_password';
+import { useNavigate } from 'react-router-dom';
 
 
 const ForgetPass = () => {

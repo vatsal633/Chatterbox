@@ -13,8 +13,8 @@ const dashboard = () => {
     for (let key in localStorage) {
       if (localStorage.hasOwnProperty(key) && key === user_name) {
         const userData = JSON.parse(localStorage.getItem(key));
-  
-      
+
+
         if (userData.username) {
           setUsername(key);
           break;
@@ -40,7 +40,7 @@ const dashboard = () => {
               <FaUserCircle />
               <p>profile</p>
             </Link>
-            <Link to='/' className='flex items-center gap-3 my-4 hover:text-white text-gray-300'>
+            <Link to='/settings' className='flex items-center gap-3 my-4 hover:text-white text-gray-300'>
               <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
               <p>settings</p>
             </Link>
@@ -69,9 +69,10 @@ const dashboard = () => {
               <h2 className="text-xl font-semibold">C Language</h2>
               <p className="text-gray-400 mt-2">Loops & Control statement </p>
 
-              <button className='bg-[#00c6ff] py-[8px] px-[12px] rounded-[7px] mt-[7px] hover:bg-[#FF9800] cursor-pointer'>
-                Countinue practice
+              <button className="cursor-pointer bg-gradient-to-r from-blue-500 to-cyan-500 py-2 px-4 rounded-lg text-white font-semibold transition-all duration-300 hover:from-cyan-500 hover:to-blue-500 hover:shadow-md">
+                Continue Practice
               </button>
+
             </div>
 
             <div className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] bg-gray-800 p-6 rounded-lg shadow-lg">
@@ -89,7 +90,7 @@ const dashboard = () => {
 
 
 
-          
+
           {/* User Statistics Section */}
           <div className="mt-10 bg-gray-900 p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold text-white">📊 User Statistics</h2>

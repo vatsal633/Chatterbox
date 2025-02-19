@@ -51,13 +51,13 @@ const navbar = () => {
                 {/* button section */}
                 <div className="right min-[776px]:flex gap-1 hidden ">
                     <Link to='/login'>
-                        <li className='list-none rounded-sm bg-[#29292e] text-white py-[11px] px-[38px]  cursor-pointer shadow-lg transition-transform hover:scale-105 hover:text-teal-400'>
+                        <li className='px-6 py-3 border-2 border-teal-400 text-teal-400 font-semibold rounded-xl hover:bg-teal-400 hover:text-white transition list-none'>
                             Log In
                         </li>
                     </Link>
 
                     <Link to='/signin'>  
-                    <li className='list-none rounded-sm bg-[#29292e] text-white py-[11px] px-[38px] cursor-pointer shadow-lg transition-transform hover:scale-105 hover:text-teal-400'>Sign in</li>
+                    <li className='px-6 py-3 border-2 border-teal-400 text-teal-400 font-semibold rounded-xl hover:bg-teal-400 hover:text-white transition list-none'>Sign in</li>
                     </Link>
                 </div>
                 <div className='block  min-[776px]:hidden'  onClick={togglemenu}>

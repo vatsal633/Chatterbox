@@ -17,9 +17,6 @@ const Login = () => {
   const onsubmitform = (e) => {
     e.preventDefault()
 
-
-    
-
     let emailData = emailRef.current.value
     let passData = passRef.current.value
     let userData = userRef.current.value
