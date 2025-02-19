@@ -28,7 +28,7 @@ const dashboard = () => {
       <div className='flex min-h-screen bg-black text-white'>
 
         {/* aside area and navbar starts*/}
-        <div className='aside w-64 bg-gray-800 p-6'>
+        <div className='aside w-64 bg-gray-800 p-6 max-[1069px]:hidden'>
           <h1 className='text-2xl text-center my-3'>Dashboard</h1>
           {/* dashboard nav section start*/}
           <nav>
@@ -62,7 +62,7 @@ const dashboard = () => {
           <p className="text-gray-400 mt-2">Track your progress and continue learning.</p>
 
           {/* Cards Section start*/}
-          <div className="grid md:grid-cols-3 gap-6 mt-6">
+          <div className="grid min-[1122px]:grid-cols-3  gap-6 mt-6">
 
             {/* cards */}
             <div className=" bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] p-6 rounded-lg shadow-lg">

@@ -6,13 +6,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 // componets
 import Navbar from './components/navbar'
-import Home from "./components/home"
-import Login from './components/login'
-import Signin from './components/signin'
-import navbar from './components/navbar'
-import AboutUs from './components/aboutus'
-import Blog from './components/blog'
-import CoursePage from './components/courses'
+import Home from "./pages/home"
+import Login from './pages/login'
+import Signin from './pages/signin'
+import AboutUs from './pages/aboutus'
+import Blog from './pages/blog'
+import CoursePage from './pages/courses'
 import Dashboard from './pages/dashboard'
 import Footer from './components/footer'
 import Forget_pass from "./pages/forget_pass"
