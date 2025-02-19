@@ -17,6 +17,7 @@ import Footer from './components/footer'
 import Forget_pass from "./pages/forget_pass"
 import Change_password from './pages/change_password'
 import Settings from './pages/settings'
+import Profile from './pages/profile'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -61,6 +62,10 @@ function App() {
     {
       path:'/settings',
       element:<><Settings/></>
+    },
+    {
+      path:'/profile',
+      element:<><Profile/></>
     }
   ])
   return (
