@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { FaUserCircle, FaTasks, FaChartLine, FaSignOutAlt } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom"
-
+import { Link, useLocation, useParams } from "react-router-dom"
 
 const dashboard = () => {
   const location = useLocation();

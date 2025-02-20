@@ -122,7 +122,7 @@ const Login = () => {
             Sign up
           </Link>
         </div>
-      </form>
+      </form> 
     </div>
   )
 }

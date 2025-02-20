@@ -42,9 +42,6 @@ const navbar = () => {
                     <div className='py-[12px] px-[16px] hover:bg-[#29292e]   rounded-[6px] cursor-pointer text-[#ffffff] hover:'>about us</div>
                     </Link>
 
-                    <Link to='/dashboard'>
-                    <div className='py-[12px] hover:bg-[#29292e]   px-[16px] rounded-[6px] cursor-pointer text-[#ffffff] hover:'>dashboard</div>
-                    </Link>
                 </div>
 
 
