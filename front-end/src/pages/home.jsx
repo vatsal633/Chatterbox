@@ -49,10 +49,10 @@ const Home = () => {
       </div>
 
       {/* Explore Skills Section start*/}
-      <div className="flex flex-col md:flex-row items-center bg-white w-11/12 mx-auto p-12 my-11 rounded-2xl shadow-lg">
+      <div className="flex flex-col md:flex-row items-center bg-white w-11/12 mx-auto p-12 my-11 rounded-2xl shadow-lg max-[628px]:p-[12px] max-[550px]:p-[0px]">
         {/* Text Section */}
         <div className="md:w-1/2 p-6">
-          <h2 className="text-3xl font-bold text-blue-600">Explore and Expand Your Skills</h2>
+          <h2 className="text-3xl font-bold text-blue-600 ">Explore and Expand Your Skills</h2>
           <p className="my-5 text-gray-600 text-lg font-medium">
             Every idea starts with a single line of code. Prep for jobs and sharpen your skills with a global community of developers.
             Access the content you need to develop new skills – and land your dream job.
