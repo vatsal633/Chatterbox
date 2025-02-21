@@ -37,6 +37,8 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {/* Practice Card */}
           <div className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] p-6 rounded-lg shadow-lg">
+            <h2 className='text-2xl text-center my-1.5'>Currently Learning</h2>
+            <div className='border w-full opacity-25  mb-2'></div>
             <h2 className="text-xl font-semibold">C Language</h2>
             <p className="text-gray-400 mt-2">Loops & Control statement</p>
             <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">

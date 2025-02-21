@@ -112,7 +112,7 @@ const Home = () => {
           {["C", "C++", "Java", "Python", "Javascript", "PHP", "Node.js", "React"].map((topic, index) => (
             <div
               key={index}
-              className="p-6 cursor-pointer bg-[#2b2b2f] rounded-xl shadow-md text-center font-bold text-xl text-gray-200 transition-transform hover:scale-105 hover:text-teal-400"
+              className="p-6 cursor-pointer bg-[#2b2b2f] rounded-xl shadow-md text-center font-bold text-xl text-gray-200 transition-transform hover:scale-105 hover:text-teal-400 "
             >
               {topic}
             </div>
