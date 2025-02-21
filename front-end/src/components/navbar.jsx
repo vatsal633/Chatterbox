@@ -14,7 +14,7 @@ const navbar = () => {
     }
     return (
         <>
-            <div className='navbar flex justify-between items-center shadow-md p-2'>
+            <div className='navbar flex justify-between items-center shadow-md p-2 '>
                 {/* logo section */}
                 <div className="left">
                     <img src={Logo} className="w-20" alt="" srcset="" />
