@@ -1,16 +1,16 @@
 import React from "react";
-import Sidebar from "../components/sidebar";
+import Sidebar from "../components/Sidebar";
 
-const practice = () => {
+const Practice = () => {
   return (
     <div className="flex bg-[#121212] min-h-screen text-white">
       {/* Sidebar for topics */}
       <Sidebar />
 
       {/* Main Content */}
-      <div className="flex-1 p-6">
-        <h1 className="text-3xl font-bold">C Language Practice</h1>
-        <p className="mt-2 text-gray-400">
+      <div className="flex-1 p-8">
+        <h1 className="text-4xl font-extrabold text-cyan-400">C Language Practice</h1>
+        <p className="mt-4 text-gray-400 text-lg">
           Select a topic from the sidebar to start practicing C programming.
         </p>
       </div>
@@ -18,4 +18,4 @@ const practice = () => {
   );
 };
 
-export default practice;
+export default Practice;

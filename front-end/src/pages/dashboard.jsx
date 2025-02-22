@@ -68,7 +68,7 @@ const Dashboard = () => {
             {/* Solved Questions */}
             <div className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] p-4 rounded-lg text-center shadow-md">
               <h3 className="text-xl font-semibold text-white">✅ Solved</h3>
-              <p className="text-4xl font-bold text-[#00c6ff]">120</p>
+              <p className="text-4xl font-semibold text-[#00c6ff]">120</p>
             </div>
 
             {/* Attempted Questions */}

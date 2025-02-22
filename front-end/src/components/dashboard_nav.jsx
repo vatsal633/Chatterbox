@@ -30,9 +30,8 @@ const DashboardNav = () => {
             {/* Sidebar */}
             <aside
                 ref={sidebarRef}
-                className={`absolute md:relative z-50 w-64 bg-gray-800 p-6 transition-transform transform ${
-                    isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-                } md:block fixed h-full top-0 left-0 md:h-auto md:static`}
+                className={`absolute md:relative z-50 w-64 bg-gray-800 p-6 transition-transform transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+                    } md:block fixed h-full top-0 left-0 md:h-auto md:static`}
             >
                 <h1 className="text-2xl text-center my-3 text-white">Dashboard</h1>
 
