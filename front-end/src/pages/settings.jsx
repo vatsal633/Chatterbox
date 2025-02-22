@@ -20,7 +20,7 @@ const Settings = () => {
   }, []);
 
   return (
-    <div className="flex h-screen bg-[#0b0f17] text-white max-[768px]:flex-col">
+    <div className="flex max-h-full[#0b0f17] text-white max-[768px]:flex-col">
       {/* Sidebar */}
 
       <div className="w-full bg-gray-900 p-4 flex justify-between items-center md:hidden">

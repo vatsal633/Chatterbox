@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import Google from "../assets/google.png";
-import Github from "../assets/github.png";
+import Google from "../../assets/Google.png"
+import Github from "../../assets/github.png";
 
 const Signin = () => {
   const [error, setError] = useState("");

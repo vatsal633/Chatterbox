@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Google from "../assets/google.png";
-import Github from "../assets/github.png";
+import Google from "../../assets/google.png";
+import Github from "../../assets/github.png";
 
 const Login = () => {
   const emailRef = useRef();
