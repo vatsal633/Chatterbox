@@ -4,17 +4,20 @@ import mongoose from 'mongoose'
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+//using this middleware for json output
+app.use(express.json())
 
+
+// create connection and making the model 
 const logindb = mongoose.createConnection('mongodb://localhost:27017/login')
-
 const loginmodel = logindb.model("Login", Login.schema)
 
 
-app.use(express.json())
 
+// different routs 
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
 
 app.get('/signin', async (req, res) => {
