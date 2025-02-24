@@ -1,6 +1,7 @@
 import express from 'express'
 import { Login } from './models/Login.js'
 import mongoose from 'mongoose'
+import 'dotenv/config'
 const app = express()
 const port = 3000
 
@@ -8,23 +9,25 @@ const port = 3000
 app.use(express.json())
 
 
-// create connection and making the model 
+// create connection from database and making the model 
 const logindb = mongoose.createConnection('mongodb://localhost:27017/login')
 const loginmodel = logindb.model("Login", Login.schema)
 
 
 
-// different routs 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+//this routes fetch all the users from database
+app.get('/api/users', async(req, res) => {
+  try {
+    const users = await loginmodel.find(); // Fetch all users
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching users' });
+  }
 })
 
 
-app.get('/signin', async (req, res) => {
-  const new_login = new loginmodel({ name: "brinda", email: "brind@gmail.com", password: "brinda123" })
-
-  await new_login.save()
-  res.send("success")
+app.get('/', async (req, res) => {
+  res.send('Hello World!')
 })
 
 app.listen(port, () => {
