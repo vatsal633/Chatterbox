@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
+import Back from '../assets/back.svg'
+import { useNavigate,useParams } from "react-router-dom";
  
 const Settings = () => {
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const sidebarRef = useRef(null);
+  const sidebarRef = useRef();
+  const navigate = useNavigate();
+  const {username} = useParams()
+
 
   // Close sidebar when clicking outside
   useEffect(() => {
@@ -40,17 +45,13 @@ const Settings = () => {
 
         {/* Dashboard Navigation */}
         <nav>
-          <Link to="/dashboard" className="flex items-center gap-3 my-4 hover:text-white text-gray-300">
-            🏠 <p>Profile</p>
-          </Link>
-          <Link to="/profile" className="flex items-center gap-3 my-4 hover:text-white text-gray-300">
-            <FaUserCircle />
-            <p>Password</p>
-          </Link>
-          <Link to="/settings" className="flex items-center gap-3 my-4 hover:text-white text-gray-300">
-            ⚙️ <p>notifications</p>
-          </Link>
+          <div className="flex" onClick={()=>{
+            navigate(`/${username}/dashboard`)
+          }}>
 
+          <img src={Back}alt="" width={20}/>
+          <span className="text-xl flex items-center gap-3 my-4 hover:text-white text-gray-300">Back To dashboard</span>
+          </div>
         </nav>
 
         <div className="absolute text-gray-400 bottom-0">@CodeQuest</div>

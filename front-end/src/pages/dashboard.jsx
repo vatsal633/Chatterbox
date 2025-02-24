@@ -1,36 +1,105 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FaUserCircle, FaSignOutAlt, FaBars } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
-import Dashboard_nav from '../components/dashboard_nav';
+import { Link, useLocation, useParams } from "react-router-dom";
+// import {Dashboard_nav} from '../components/dashboard_nav';
+import { useNavigate } from 'react-router-dom';
+
 
 const Dashboard = () => {
-  const location = useLocation();
-  const user_name = location.state?.username || "Guest";
-  const [Username, setUsername] = useState("");
-  // const [isSidebarOpen, setSidebarOpen] = useState(false);
-  // const sidebarRef = useRef();
+  const location = useLocation()
+  const { username } = useParams()
+  // const user_name = location.state?.username || "Guest";
+  const [Username, setUsername] = useState("")
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const sidebarRef = useRef(null);
+  const navigate = useNavigate()
+  
 
+  // checks in local storage
+  // useEffect(() => {
+  //   for (let key in localStorage) {
+  //     if (localStorage.hasOwnProperty(key) && key === user_name) {
+  //       const userData = JSON.parse(localStorage.getItem(key));
+  //       if (userData.username) {
+  //         setUsername(key);
+  //         break;
+  //       }
+  //     }
+  //   }
+  // }, [user_name]);
+
+  //store the username in state
   useEffect(() => {
-    for (let key in localStorage) {
-      if (localStorage.hasOwnProperty(key) && key === user_name) {
-        const userData = JSON.parse(localStorage.getItem(key));
-        if (userData.username) {
-          setUsername(key);
-          break;
-        }
+    if (username) {
+      setUsername(username)
+    }
+  }, [username])
+
+  // Close sidebar when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        setSidebarOpen(false);
       }
     }
-  }, [user_name]);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [])
+
+  const goToSettings = () => {
+    navigate(`/${username}/settings`);
+  };
+
+
+  console.log(`username is ${username}`)
+
 
   // Handle click outside sidebar to close
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-black text-white">
-      
-      <Dashboard_nav/>
+
+      {/* Mobile Navbar */}
+      <div className="w-full bg-gray-900 p-4 flex justify-between items-center md:hidden">
+        <h1 className="text-xl font-bold text-white">Dashboard</h1>
+        <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="text-white text-2xl">
+          <FaBars />
+        </button>
+      </div>
+
+      <aside
+        ref={sidebarRef}
+        className={`absolute md:relative z-50 w-64 bg-gray-800 p-6 transition-transform transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+          } md:block fixed h-full top-0 left-0 md:h-auto md:static`}
+      >
+        <h1 className="text-2xl text-center my-3 text-white">Dashboard</h1>
+
+        {/* Dashboard Navigation */}
+        <nav>
+          <Link to={`/${username}/dashboard`} className="flex items-center gap-3 my-4 hover:text-white text-gray-300">
+            🏠 <p>Home</p>
+          </Link>
+          <Link to={`/${username}/profile`} className="flex items-center gap-3 my-4 hover:text-white text-gray-300">
+            <FaUserCircle />
+            <p>Profile</p>
+          </Link>
+          <button onClick={goToSettings} className="flex items-center gap-3 my-4 hover:text-white text-gray-300">
+            ⚙️ Settings
+          </button>
+          <Link to="/" className="flex items-center gap-3 my-4 hover:text-red-500 text-red-400">
+            <FaSignOutAlt />
+            <p>Log Out</p>
+          </Link>
+        </nav>
+
+
+        <div className="absolute text-gray-400 bottom-0">@CodeQuest</div>
+      </aside>
+
+
 
       {/* Main Dashboard */}
       <main className="flex-1 p-6 md:p-8">
-        <h1 className="text-3xl font-bold">Welcome, {Username}</h1>
+        <h1 className="text-3xl font-bold">Welcome,{Username} </h1>
         <p className="text-gray-400 mt-2">Track your progress and continue learning.</p>
 
         {/* Cards Section */}

@@ -13,7 +13,7 @@ const practice = () => {
         <div>
           <h1 className="text-4xl mb-5">Select a Language</h1>
         </div>
-        <div className="flex gap-3">
+        <div className="flex max-[532px]:flex-col gap-3">
           <button onClick={() => navigate("/practice/c")} className="bg-[#111317] px-6 text-3xl rounded-md">C</button>
           <button onClick={() => navigate("/practice/cpp")} className="bg-[#111317] p-4 text-3xl rounded-md">C++</button>
           <button onClick={() => navigate("/practice/python")} className="bg-[#111317] p-4 text-3xl rounded-md">Python</button>

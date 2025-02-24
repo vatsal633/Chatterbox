@@ -1,14 +1,13 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Menu } from "lucide-react";
 
-const LanguagePage = () => {  
-    const { language } = useParams();  
+const LanguagePage = () => {
+    const { language } = useParams();
     const navigate = useNavigate();
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
-    // Supported languages
     const supportedLanguages = ["c", "cpp", "python", "javascript"];
-
-    // Topics for each language
     const topics = {
         c: ["Variables", "Loops", "Functions", "Pointers", "Structures"],
         cpp: ["OOP", "STL", "Inheritance", "Polymorphism", "Templates"],
@@ -18,19 +17,32 @@ const LanguagePage = () => {
 
     useEffect(() => {
         if (!supportedLanguages.includes(language)) {
-            navigate("/404", { replace: true }); // Redirect if not valid
+            navigate("/404", { replace: true });
         }
     }, [language, navigate]);
 
+    const capitalize = (text) => text.charAt(0).toUpperCase() + text.slice(1);
+
     return (
-        <div className="flex min-h-screen bg-gray-900 text-white">
+        <div className="flex flex-col md:flex-row min-h-screen bg-gray-900 text-white">
+            {/* Sidebar Toggle Button (Mobile) */}
+            <button
+                className="md:hidden p-4 text-cyan-400 focus:outline-none flex justify-end"
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+            >
+                <Menu size={28} />
+            </button>
+
             {/* Sidebar */}
-            <aside className="w-64 bg-gray-800 p-6 space-y-4">
+            <aside
+                className={`fixed md:static top-0 left-0 w-64 bg-gray-800 p-6 space-y-4 transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+                    } md:translate-x-0 transition-transform duration-300 ease-in-out md:block max-[768px]:w-full z-10`}
+            >
                 <h2 className="text-xl font-bold text-cyan-400">Topics</h2>
                 <ul className="space-y-2">
                     {topics[language]?.map((topic, index) => (
-                        <li 
-                            key={index} 
+                        <li
+                            key={index}
                             className="p-2 bg-gray-700 rounded-lg hover:bg-cyan-600 transition-all duration-200 cursor-pointer"
                         >
                             {topic}
@@ -39,40 +51,35 @@ const LanguagePage = () => {
                 </ul>
             </aside>
 
+
+
             {/* Main Content */}
-            <div className="flex-1 flex flex-col items-center justify-center p-10">
-                <div className="w-full max-w-3xl p-6 bg-gray-800 bg-opacity-60 rounded-2xl shadow-lg backdrop-blur-md text-center">
-                    <h1 className="text-4xl font-extrabold text-cyan-400 uppercase">
-                        Practice {language}
-                    </h1>
-                    <p className="text-lg text-gray-300 mt-4">
-                        Start coding in <span className="font-bold text-cyan-300">{language}</span> here...
-                    </p>
+            <div className="bg-[#0b0f17] w-full flex flex-col">
+                {/* Main Section Header */}
+                <div className="bg-[#111317] p-5 border-b border-gray-700">
+                    <h2 className="text-2xl">{capitalize(language)}</h2>
+                </div>
 
-                    {/* Code Editor Placeholder */}
-                    <div className="mt-6 bg-gray-700 rounded-xl p-4 text-left text-gray-300">
-                        <pre className="overflow-x-auto">
-                            <code className="text-sm">
-                                // Write your {language} code here... {"\n"}
-                                print("Hello, World!")  {/* Example */}
-                            </code>
-                        </pre>
-                    </div>
-
-                    {/* Buttons */}
-                    <div className="flex justify-center gap-4 mt-6">
-                        <button 
-                            className="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg shadow-md transition-all duration-200"
-                            onClick={() => navigate("/practice")}
+                {/* Question Section */}
+                <div className="w-1/2 m-auto flex justify-end">
+                <button
+                    className=" px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all"
+                >
+                    Generate AI Question
+                </button>
+                </div>
+                <div className="flex flex-col items-center min-h-screen p-6">
+                    {Array.from({ length: 3 }).map((_, index) => (
+                        <div
+                            key={index}
+                            className="bg-[#111317] w-full max-w-2xl flex justify-between items-center p-6 rounded-md border border-gray-700 mb-4 shadow-md"
                         >
-                            Go Back
-                        </button>
-                        <button 
-                            className="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg shadow-md transition-all duration-200"
-                        >
-                            Run Code
-                        </button>
-                    </div>
+                            <h3 className="text-lg font-semibold">Question {index + 1}</h3>
+                            <button className="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg transition-all">
+                                Solve Question
+                            </button>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
