@@ -24,6 +24,9 @@ const Login = () => {
     if (storedUser && storedUser.email === emailData && storedUser.password === passData) {
       emailRef.current.value = "";
       passRef.current.value = "";
+
+    localStorage.setItem("isLoggedin",JSON.stringify({name:userData,auth:true}));
+
       navigate(`/${userData}/dashboard`, { state: { username: userData } });
     } else {
       alert("Invalid email or password");

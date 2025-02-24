@@ -1,10 +1,17 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { useParams } from "react-router-dom";
-const ProtectedRoute = () => {
-  const authToken = localStorage.getItem("authToken");
-  const isAuthenticated = authToken && JSON.parse(authToken)?.username;
+import { Navigate, useParams } from "react-router-dom";
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+const ProtectedRoute = ({ children }) => {
+  const { username } = useParams();
+  
+  // Retrieve and parse stored auth data
+  const storedUser = JSON.parse(localStorage.getItem("isLoggedin"));
+
+  // Validate authentication and username match
+  if (!storedUser || !storedUser.auth || (username && storedUser.name !== username)) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
 };
 
 export default ProtectedRoute;

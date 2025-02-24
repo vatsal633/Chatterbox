@@ -74,23 +74,23 @@ const router = createBrowserRouter([
   // Protected Routes
   {
     path: "/:username/dashboard",
-    element: <><Dashboard /></>
+    element: <ProtectedRoute><Dashboard /></ProtectedRoute>
   },
   {
     path: "/:username/settings",
-    element: <><Settings /></>
+    element: <ProtectedRoute><Settings /></ProtectedRoute>
   },
   {
     path: "/:username/profile",
-    element: <><Profile /></>
+    element: <ProtectedRoute><Profile /></ProtectedRoute>
   },
   {
     path: "/practice",
-    element: <><Practice /></>
+    element: <ProtectedRoute><Practice /></ProtectedRoute>
   },
   {
     path: "/practice/:language",
-    element: <><Languagepage /></>
+    element: <ProtectedRoute><Languagepage /></ProtectedRoute>
   }
   
 ]);
