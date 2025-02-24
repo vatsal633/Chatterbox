@@ -12,6 +12,9 @@ const Settings = () => {
   const navigate = useNavigate();
   const {username} = useParams()
 
+  // Add useRef for input fields leter used in useEffect to show the data
+  const username_ref = useRef()
+  const email_ref = useRef()
 
   // Close sidebar when clicking outside
   useEffect(() => {
@@ -23,6 +26,24 @@ const Settings = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  //add useeffect to show the data to input field
+  useEffect(()=>{
+    username_ref.current.value = username
+    let stored_name = JSON.parse(localStorage.getItem(username))
+    email_ref.current.value = stored_name.email
+  })
+
+  const handleChange = () => {
+    try{
+      let stored_name = JSON.parse(localStorage.getItem(username))
+      stored_name.email = email_ref.current.value
+      stored_name.username = username_ref.current.value
+      localStorage.setItem(username_ref.current.value,JSON.stringify(stored_name))
+    }catch(e){
+        console.log(e)
+    }
+  }
 
   return (
     <div className="flex max-h-full[#0b0f17] text-white max-[768px]:flex-col">
@@ -66,9 +87,9 @@ const Settings = () => {
           <div className="flex items-center space-x-4 max-[933px]:flex-col">
             <div className="w-16 h-16 bg-gray-600 rounded-full  max-[933px]:mb-4"></div>
             <div className="space-y-2">
-              <input type="text" placeholder="Full Name" className="w-full p-2 border border-gray-600 rounded  text-white" />
-              <input type="email" placeholder="Email Address" className="w-full p-2 border border-gray-600 rounded  text-white" />
-              <button className="px-4 py-2 bg-blue-500 text-white rounded">Save Changes</button>
+              <input type="text" placeholder="Full Name" className="w-full p-2 border border-gray-600 rounded  text-white" ref={username_ref}/>
+              <input type="email" placeholder="Email Address" className="w-full p-2 border border-gray-600 rounded  text-white" ref={email_ref}/>
+              <button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={handleChange}>Save Changes</button>
             </div>
           </div>
         </div>
