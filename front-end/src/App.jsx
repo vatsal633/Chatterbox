@@ -85,11 +85,11 @@ const router = createBrowserRouter([
     element: <ProtectedRoute><Profile /></ProtectedRoute>
   },
   {
-    path: "/practice",
+    path: "/:username/practice",
     element: <ProtectedRoute><Practice /></ProtectedRoute>
   },
   {
-    path: "/practice/:language",
+    path: "/:username/practice/:language",
     element: <ProtectedRoute><Languagepage /></ProtectedRoute>
   }
   

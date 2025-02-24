@@ -44,7 +44,7 @@ const Profile = () => {
   };
 
   const SaveSkill = () => {
-    localStorage.setItem(username, JSON.stringify(skills));
+    localStorage.setItem(`${username}_skills`, JSON.stringify(skills));
   };
 
   // Close sidebar when clicking outside

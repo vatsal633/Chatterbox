@@ -1,27 +1,47 @@
 import React from "react";
-import Sidebar from "../components/Sidebar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/navbar";
 
-const practice = () => {
-  const navigate = useNavigate()
-  return (
+const Practice = () => {
+  const navigate = useNavigate();
+  const { username } = useParams();
 
+  return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="flex flex-col justify-center items-center min-h-screen">
         <div>
           <h1 className="text-4xl mb-5">Select a Language</h1>
         </div>
         <div className="flex max-[532px]:flex-col gap-3">
-          <button onClick={() => navigate("/practice/c")} className="bg-[#111317] px-6 text-3xl rounded-md">C</button>
-          <button onClick={() => navigate("/practice/cpp")} className="bg-[#111317] p-4 text-3xl rounded-md">C++</button>
-          <button onClick={() => navigate("/practice/python")} className="bg-[#111317] p-4 text-3xl rounded-md">Python</button>
-          <button onClick={() => navigate("/practice/javascript")} className="bg-[#111317] p-4 text-3xl rounded-md">JavaScript</button>
+          <button
+            onClick={() => navigate(`/${username}/practice/c`)}
+            className="bg-[#111317] px-6 text-3xl rounded-md"
+          >
+            C
+          </button>
+          <button
+            onClick={() => navigate(`/${username}/practice/cpp`)}
+            className="bg-[#111317] p-4 text-3xl rounded-md"
+          >
+            C++
+          </button>
+          <button
+            onClick={() => navigate(`/${username}/practice/python`)}
+            className="bg-[#111317] p-4 text-3xl rounded-md"
+          >
+            Python
+          </button>
+          <button
+            onClick={() => navigate(`/${username}/practice/javascript`)}
+            className="bg-[#111317] p-4 text-3xl rounded-md"
+          >
+            JavaScript
+          </button>
         </div>
       </div>
     </>
   );
 };
 
-export default practice;
+export default Practice;
