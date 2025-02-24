@@ -54,6 +54,16 @@ const Dashboard = () => {
   console.log(`username is ${username}`)
 
 
+  const handleLogout = ()=>{
+    localStorage.removeItem("isLoggedin");
+    navigate("/");
+  }
+
+  const handleCountinuePractice = ()=>{
+    navigate(`/${username}/practice`);
+  }
+
+
   // Handle click outside sidebar to close
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-black text-white">
@@ -85,7 +95,7 @@ const Dashboard = () => {
           <button onClick={goToSettings} className="flex items-center gap-3 my-4 hover:text-white text-gray-300">
             ⚙️ Settings
           </button>
-          <Link to="/" className="flex items-center gap-3 my-4 hover:text-red-500 text-red-400">
+          <Link to="/" className="flex items-center gap-3 my-4 hover:text-red-500 text-red-400" onClick={handleLogout}>
             <FaSignOutAlt />
             <p>Log Out</p>
           </Link>
@@ -110,7 +120,7 @@ const Dashboard = () => {
             <div className='border w-full opacity-25  mb-2'></div>
             <h2 className="text-xl font-semibold">C Language</h2>
             <p className="text-gray-400 mt-2">Loops & Control statement</p>
-            <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">
+            <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg" onClick={handleCountinuePractice}>
               Continue Practice
             </button>
           </div>

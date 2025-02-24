@@ -38,7 +38,15 @@ const LanguagePage = () => {
                 className={`fixed md:static top-0 left-0 w-64 bg-gray-800 p-6 space-y-4 transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
                     } md:translate-x-0 transition-transform duration-300 ease-in-out md:block max-[768px]:w-full z-10`}
             >
-                <h2 className="text-xl font-bold text-cyan-400">Topics</h2>
+                <div className="flex items-center justify-between">
+                    <h2 className="text-xl font-bold text-cyan-400 inline">Topics</h2>
+                    <button
+                        className="md:hidden p-4 text-cyan-400 focus:outline-none flex justify-end"
+                        onClick={() => setSidebarOpen(!sidebarOpen)}
+                    >
+                        <Menu size={28} />
+                    </button>
+                </div>
                 <ul className="space-y-2">
                     {topics[language]?.map((topic, index) => (
                         <li
@@ -61,12 +69,12 @@ const LanguagePage = () => {
                 </div>
 
                 {/* Question Section */}
-                <div className="w-1/2 m-auto flex justify-end">
-                <button
-                    className=" px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all"
-                >
-                    Generate AI Question
-                </button>
+                <div className=" flex justify-center mt-4">
+                    <button
+                        className=" px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all"
+                    >
+                        Generate AI Question
+                    </button>
                 </div>
                 <div className="flex flex-col items-center min-h-screen p-6">
                     {Array.from({ length: 3 }).map((_, index) => (

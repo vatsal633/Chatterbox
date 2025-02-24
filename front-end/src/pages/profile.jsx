@@ -62,6 +62,11 @@ const Profile = () => {
     navigate(`/${username}/settings`);
   };
 
+  const handleLogout = ()=>{
+    localStorage.removeItem("isLoggedin");
+    navigate("/");
+  }
+
   return (
     <div className="flex min-h-screen bg-[#0b0f17] text-white flex-col md:flex-row">
       {/* Sidebar */}
