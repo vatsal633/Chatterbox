@@ -1,17 +1,32 @@
 import React, { useState } from 'react'
 import Logo from "../assets/logo.png"
 import { Link } from 'react-router-dom'
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import Menu from "../assets/menu.svg"
 
 const navbar = () => {
 
     const [IsVisibility, setIsVisibility] = useState(false)
+    const [Username, setUsername] = useState('')
+    const [Verified, setVerified] = useState(false)
 
 
     const togglemenu = () => {
         setIsVisibility(!IsVisibility)
     }
+
+    useEffect(() => {
+        try {
+            const authentication = JSON.parse(localStorage.getItem("isLoggedin"));
+            const logged_username = JSON.parse(localStorage.getItem("isLoggedin"));
+            if (authentication && authentication.auth === true) {
+                setVerified(authentication.auth);
+                setUsername(logged_username.name)
+            }
+        } catch (e) {
+            console.error("Error reading authentication:", e);
+        }
+    }, []);
     return (
         <>
             <div className='navbar flex justify-between items-center shadow-md p-2 '>
@@ -44,6 +59,12 @@ const navbar = () => {
                     <Link to='/aboutus'>
                         <div className='py-[12px] px-[16px] hover:bg-[#29292e]   rounded-[6px] cursor-pointer text-[#ffffff] hover:'>about us</div>
                     </Link>
+
+                    {Verified && (
+                        <Link to={`/${Username}/dashboard`}>
+                            <div className='nav-link py-[12px] px-[16px] hover:bg-[#29292e]   rounded-[6px] cursor-pointer text-[#ffffff]'>Dashboard</div>
+                        </Link>
+                    )}
 
                 </div>
 
@@ -87,9 +108,11 @@ const navbar = () => {
                     <div className='py-[12px] px-[16px] hover:bg-[#29292e]   rounded-[6px] cursor-pointer text-[#ffffff] hover:'>about us</div>
                 </Link>
 
-                <Link to='/dashboard'>
-                    <div className='py-[12px] hover:bg-[#29292e]   px-[16px] rounded-[6px] cursor-pointer text-[#ffffff] hover:'>dashboard</div>
-                </Link>
+                {Verified && (
+                    <Link to={`/${Username}/dashboard`}>
+                        <div className='nav-link py-[12px] px-[16px] hover:bg-[#29292e]   rounded-[6px] cursor-pointer text-[#ffffff]'>Dashboard</div>
+                    </Link>
+                )}
             </div>)}
 
         </>

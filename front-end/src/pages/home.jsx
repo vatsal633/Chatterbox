@@ -127,7 +127,7 @@ const Home = () => {
         {/* text section */}
         <div className='text-section'>
           <h1 className='text-4xl font-bold  mb-8 text-[#44d1d1]'>Track Your Progress With Dashboard</h1>
-          <p className='my-5'>The Track Your Progress dashboard in CodeQuest provides an interactive and visual way to monitor your coding journey. It helps users stay motivated and improve by offering insights into their problem-solving performance.</p>
+          <p className='my-5 text-white'>The Track Your Progress dashboard in CodeQuest provides an interactive and visual way to monitor your coding journey. It helps users stay motivated and improve by offering insights into their problem-solving performance.</p>
           <button className="px-6 py-3 border-2 border-teal-400 text-teal-400 font-semibold rounded-xl hover:bg-teal-400 hover:text-white transition">
             Explore Topics
           </button>
