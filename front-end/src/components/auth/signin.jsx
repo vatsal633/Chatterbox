@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const Signin = () => {
   const emailRef = useRef();
@@ -8,8 +9,19 @@ const Signin = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
+  const [Formdata, setFormdata] = useState({
+    name: "",
+    email: "",
+    password: ""
+  })
+  
 
-  const handleSignup = (e) => {
+  const handleChange = (e) => {
+    setFormdata({ ...Formdata, [e.target.name]: e.target.value });
+  }
+
+
+  const handleSignup = async (e) => {
     e.preventDefault();
 
     let username = userRef.current.value.trim();
@@ -30,10 +42,23 @@ const Signin = () => {
     // Save user details in localStorage
     localStorage.setItem(username, JSON.stringify({ username, email, password }));
     
-    setSuccess("Account created successfully! Redirecting...");
-    setError("");
+   
 
-    setTimeout(() => navigate("/login"), 2000);
+
+
+    //saving the data to the database
+    
+    try{
+      const response = await axios.post("http://localhost:3000/api/auth/register",Formdata)
+      console.log(response.data)
+      setSuccess("Account created successfully! Redirecting...");
+      setError("");
+      setTimeout(() => navigate("/login"), 2000);
+    }catch(err){ 
+      console.error("Registration Error:", err.response?.data?.message || err.message);
+      setError(err.response?.data?.message || "Something went wrong!");
+    }
+
   };
 
   return (
@@ -53,6 +78,8 @@ const Signin = () => {
           className="w-full px-4 py-3 mb-4 bg-[#242424] text-white rounded-lg"
           placeholder="Choose a username"
           required
+          onChange={handleChange}
+          name="name"
         />
         <input
           type="email"
@@ -60,6 +87,8 @@ const Signin = () => {
           className="w-full px-4 py-3 mb-4 bg-[#242424] text-white rounded-lg"
           placeholder="Enter email"
           required
+          onChange={handleChange}
+          name="email"
         />
         <input
           type="password"
@@ -67,6 +96,8 @@ const Signin = () => {
           className="w-full px-4 py-3 mb-4 bg-[#242424] text-white rounded-lg"
           placeholder="Create password"
           required
+          onChange={handleChange}
+          name="password"
         />
 
         <button type="submit" className="w-full bg-[#00C6FF] text-black font-bold py-3 rounded-lg hover:bg-[#FF9800] hover:text-white">
