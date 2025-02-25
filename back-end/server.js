@@ -1,35 +1,33 @@
 import express from 'express'
-import { Login } from './models/Login.js'
 import mongoose from 'mongoose'
 import 'dotenv/config'
+import cors from 'cors'
+import authRoutes from './routes/authRoutes.js'
+
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000 // Fixing the port issue
 
-//using this middleware for json output
+// Middleware
 app.use(express.json())
+app.use(cors())
 
+// Routes
+app.use('/api/auth', authRoutes)
 
-// create connection from database and making the model 
-const logindb = mongoose.createConnection('mongodb://localhost:27017/login')
-const loginmodel = logindb.model("Login", Login.schema)
-
-
-
-//this routes fetch all the users from database
-app.get('/api/users', async(req, res) => {
-  try {
-    const users = await loginmodel.find(); // Fetch all users
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching users' });
-  }
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/login', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 })
+.then(() => console.log(' Database connected'))
+.catch((err) => console.error(' Error connecting to database:', err))
 
-
-app.get('/', async (req, res) => {
+// Default Route
+app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+// Start Server
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(` Server running on port ${port}`)
 })

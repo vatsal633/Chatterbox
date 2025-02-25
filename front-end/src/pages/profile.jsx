@@ -4,6 +4,8 @@ import { MdOutlineAlternateEmail, MdOutlineLocalPhone } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaBars, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
 import { useParams } from "react-router-dom";
+import axios from "axios";  // Import axios
+
 
 const Profile = () => {
   const { username } = useParams();
@@ -13,6 +15,26 @@ const Profile = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const sidebarRef = useRef(null);
   const navigate = useNavigate();
+  const [userData, setUserData] = useState(null);
+
+
+  // Fetch user data from the server
+
+  useEffect(()=>{
+    const fetchUserdata = async ()=>{
+      try{
+        const response = await axios.get(`http://localhost:3000/api/auth/user/${username}`);
+        setUserData(response.data);
+        console.log("🟢 Fetched User Data:", response.data); 
+      } catch(e){
+        console.error("Error fetching user data:", e);
+      }finally{
+        console.log("User Data Fetched")
+      }
+    }
+
+  fetchUserdata();
+  },[username]);
 
   // Load skills from localStorage when component mounts
   useEffect(() => {

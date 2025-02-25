@@ -7,4 +7,5 @@ const loginschema = mongoose.Schema({
     password:String
 })
 
-export const Login = mongoose.model('login',loginschema) 
+export const Login = mongoose.model('Login', loginschema, 'logins'); // Force 'logins'
+
