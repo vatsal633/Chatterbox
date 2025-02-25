@@ -35,7 +35,7 @@ const Signin = () => {
 
     // Check if user already exists
     if (localStorage.getItem(username)) {
-      setError("Username already taken! Try a different one.");
+      // setError("Username already taken! Try a different one.");
       return;
     }
 

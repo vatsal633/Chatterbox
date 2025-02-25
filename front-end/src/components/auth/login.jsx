@@ -4,32 +4,55 @@ import { Link, useNavigate } from "react-router-dom";
 import Google from "../../assets/google.png";
 import Github from "../../assets/github.png";
 
+
 const Login = () => {
+
+  const [Error, setError] = useState(null);
+
   const emailRef = useRef();
   const passRef = useRef();
   const userRef = useRef();
 
   const navigate = useNavigate();
 
-  const onsubmitform = (e) => {
+
+  //handling submit form
+  const onsubmitform = async (e) => {
     e.preventDefault();
+
+
+    setError(null);
 
     let emailData = emailRef.current.value;
     let passData = passRef.current.value;
     let userData = userRef.current.value;
 
-    // Fetch stored user data from localStorage
-    const storedUser = JSON.parse(localStorage.getItem(userData));
 
-    if (storedUser && storedUser.email === emailData && storedUser.password === passData) {
-      emailRef.current.value = "";
-      passRef.current.value = "";
+    try {
+      const response = await fetch(`http://localhost:3000/api/auth/user/${userData}`);
+      
+      if (!response.ok) {
+        if (response.status === 404) {
+          throw new Error("User not found");
+        }
+        throw new Error("Something went wrong! Please try again.");
+      }
 
-    localStorage.setItem("isLoggedin",JSON.stringify({name:userData,auth:true}));
+      const user = await response.json(); // Correct way to extract data
 
-      navigate(`/${userData}/dashboard`, { state: { username: userData } });
-    } else {
-      alert("Invalid email or password");
+      if (user.email === emailData && user.password === passData) {
+        localStorage.setItem("isLoggedin", JSON.stringify({ name: userData, auth: true }));
+
+        emailRef.current.value = "";
+        passRef.current.value = ""; // Fixed typo
+
+        navigate(`/${userData}/dashboard`, { state: { username: userData } });
+      } else {
+        setError("Invalid email or password");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      setError(err.message);
     }
   };
 
@@ -41,6 +64,8 @@ const Login = () => {
       >
         {/* Heading */}
         <h2 className="text-3xl font-bold text-white text-center mb-6">Login</h2>
+
+        {Error && <p className="text-red-500 text-center mb-4">{Error}</p>}
 
         {/* Username */}
         <div className="mb-4">

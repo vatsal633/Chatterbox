@@ -9,8 +9,9 @@ router.get('/user/:username', async (req, res) => {
         const username = req.params.username.trim().toLowerCase();
         console.log("Searching for user:", username);
 
-        const user = await Login.findOne({ name: { $regex: new RegExp(`^${username}$`, 'i') } }); // Case-insensitive search
-
+        const user = await Login.findOne({ name: { $regex: new RegExp(`^${username}$`, 'i') } });
+                   
+        //just for debugging
         console.log(" Query Result:", user);
 
         if (!user) {
