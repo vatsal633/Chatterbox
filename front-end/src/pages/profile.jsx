@@ -25,7 +25,7 @@ const Profile = () => {
       try{
         const response = await axios.get(`http://localhost:3000/api/auth/user/${username}`);
         setUserData(response.data);
-        console.log("🟢 Fetched User Data:", response.data); 
+        console.log("🟢Fetched User Data:", response.data); 
       } catch(e){
         console.error("Error fetching user data:", e);
       }finally{

@@ -38,7 +38,7 @@ const Login = () => {
         throw new Error("Something went wrong! Please try again.");
       }
 
-      const user = await response.json(); // Correct way to extract data
+      const user = await response.json();
 
       if (user.email === emailData && user.password === passData) {
         localStorage.setItem("isLoggedin", JSON.stringify({ name: userData, auth: true }));

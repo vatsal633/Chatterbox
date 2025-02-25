@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FaBars, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
 import Back from '../assets/back.svg'
 import { useNavigate,useParams } from "react-router-dom";
+import axios from "axios";
  
 const Settings = () => {
   const [emailNotifications, setEmailNotifications] = useState(true);
@@ -42,6 +43,32 @@ const Settings = () => {
       localStorage.setItem(username_ref.current.value,JSON.stringify(stored_name))
     }catch(e){
         console.log(e)
+    }
+  }
+
+
+  //fetch api to change the password
+  const changepass = async () => { 
+    try{
+      let old_password = document.getElementById('oldpassword').value
+      let new_password = document.getElementById('newpassword').value
+
+
+      if(!old_password || !new_password){
+        alert("All fields are required")
+      }
+
+      
+
+
+      const  response = axios.put(`http://localhost:3000/api/auth/update-password`,{email:email_ref.current.value,
+        oldpassword:old_password,
+        newpassword:new_password
+      })
+
+      alert("Password Updated")
+    }catch(err){
+      console.log(err)
     }
   }
 
@@ -97,8 +124,9 @@ const Settings = () => {
         {/* Security Settings */}
         <div id="security" className="p-6 rounded-lg bg-[#111317] border shadow-lg">
           <h3 className="text-lg font-bold mb-4">Account Security</h3>
-          <input type="password" placeholder="Change Password" className="w-full p-2 border border-gray-600 rounded  text-white" />
-          <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded">Update Password</button>
+          <input type="password" id="oldpassword" placeholder="Enter Old Password" className="w-full p-2 border border-gray-600 rounded  text-white mb-3 " />
+          <input type="password" id="newpassword" placeholder="Enter New Password" className="w-full p-2 border border-gray-600 rounded  text-white" />
+          <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded" onClick={changepass}>Update Password</button>
         </div>
 
         {/* Notifications */}
