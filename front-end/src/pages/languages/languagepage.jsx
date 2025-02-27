@@ -9,7 +9,7 @@ const LanguagePage = () => {
 
     const supportedLanguages = ["c", "cpp", "python", "javascript"];
     const topics = {
-        c: ["Variables", "Loops", "Functions", "Pointers", "Structures"],
+        c: ["DMA","Controll statement","Arrays & String", "Loops", "Functions", "Pointers", "Structures"],
         cpp: ["OOP", "STL", "Inheritance", "Polymorphism", "Templates"],
         python: ["Lists", "Dictionaries", "Functions", "OOP", "Decorators"],
         javascript: ["DOM", "ES6", "Async/Await", "Closures", "Prototypes"],
@@ -22,6 +22,11 @@ const LanguagePage = () => {
     }, [language, navigate]);
 
     const capitalize = (text) => text.charAt(0).toUpperCase() + text.slice(1);
+
+
+    const read = (topic) => {
+        console.log(topic);
+    }
 
     return (
         <div className="flex flex-col md:flex-row min-h-screen bg-gray-900 text-white">
@@ -52,6 +57,7 @@ const LanguagePage = () => {
                         <li
                             key={index}
                             className="p-2 bg-gray-700 rounded-lg hover:bg-cyan-600 transition-all duration-200 cursor-pointer"
+                            onClick={() => read(topic)}
                         >
                             {topic}
                         </li>

@@ -75,6 +75,7 @@ const Dashboard = () => {
           <FaBars />
         </button>
       </div>
+      
 
       <aside
         ref={sidebarRef}
@@ -109,8 +110,12 @@ const Dashboard = () => {
 
       {/* Main Dashboard */}
       <main className="flex-1 p-6 md:p-8">
+  
         <h1 className="text-3xl font-bold">Welcome,{Username} </h1>
-        <p className="text-gray-400 mt-2">Track your progress and continue learning.</p>
+        <p className="text-gray-400 mt-2">Track your progress and continue learning.
+        
+        </p>
+
 
         {/* Cards Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
