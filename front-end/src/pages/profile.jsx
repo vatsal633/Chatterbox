@@ -19,13 +19,12 @@ const Profile = () => {
 
 
   // Fetch user data from the server
-
   useEffect(()=>{
     const fetchUserdata = async ()=>{
       try{
         const response = await axios.get(`http://localhost:3000/api/auth/user/${username}`);
         setUserData(response.data);
-        console.log("🟢Fetched User Data:", response.data); 
+        // console.log("Fetched User Data:", response.data); 
       } catch(e){
         console.error("Error fetching user data:", e);
       }finally{
@@ -38,7 +37,7 @@ const Profile = () => {
 
   // Load skills from localStorage when component mounts
   useEffect(() => {
-    const savedSkills = localStorage.getItem(username);
+    const savedSkills = localStorage.getItem(`${username}_skills`);
     try {
       const parsedSkills = savedSkills ? JSON.parse(savedSkills) : [];
       if (Array.isArray(parsedSkills)) {
@@ -84,9 +83,31 @@ const Profile = () => {
     navigate(`/${username}/settings`);
   };
 
+  // remove the authentication token from local storage and redirect to login page
   const handleLogout = ()=>{
     localStorage.removeItem("isLoggedin");
     navigate("/");
+  }
+
+
+  // saving skiils to database
+  const saveskilldb = async() => {
+    try{
+        const response = await axios.post('http://localhost:3000/api/auth/add-skill',{username,skills})
+
+      if(response.status === 200){
+        console.log("Skills saved successfully!");
+      }
+
+
+      if(response.status===400){
+        console.log("Skills cannot be empty");
+      }
+
+
+    }catch(err){
+        console.log("error saving skills:",err);
+    }
   }
 
   return (
@@ -171,6 +192,7 @@ const Profile = () => {
               onClick={() => {
                 setChange(!Change);
                 SaveSkill();
+                saveskilldb();
               }}
               className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 rounded-lg px-5 py-2.5 mb-2"
             >

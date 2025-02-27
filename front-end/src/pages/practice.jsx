@@ -11,9 +11,9 @@ const Practice = () => {
       <Navbar />
       <div className="flex flex-col justify-center items-center min-h-screen">
         <div>
-          <h1 className="text-4xl mb-5">Select a Language</h1>
+          <h1 className="text-4xl mb-5 text-white">Select a Language</h1>
         </div>
-        <div className="flex max-[532px]:flex-col gap-3">
+        <div className="flex max-[532px]:flex-col gap-3 text-white">
           <button
             onClick={() => navigate(`/${username}/practice/c`)}
             className="bg-[#111317] px-6 text-3xl rounded-md"

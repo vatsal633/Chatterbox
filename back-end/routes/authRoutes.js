@@ -49,7 +49,7 @@ router.post('/register', async (req, res) => {
     }   
 })
 
-
+//update password routes
 router.put('/update-password', async (req, res) => {
     try{
         const {email,oldpassword,newpassword} = req.body
@@ -77,6 +77,44 @@ router.put('/update-password', async (req, res) => {
 
     }catch(err){
         onsole.error("Server error:", err);
+        res.status(500).json({message:"Server Error",error:err})
+    }
+})
+
+
+router.post('/add-skill',async(req,res)=>{
+    try{
+        const {username,skills} = req.body
+
+        let name = username
+
+        console.log("Adding skill for user:", name);
+        console.log(skills)
+
+        if(skills == null){
+            return res.status(400).json({message:"Skills cannot be empty"})
+        }
+
+        if(!name || !skills || skills.length===0){
+            return res.status(400).json({message:"All fields are required"})
+        }
+
+        const user = await Login.findOne({name})
+        console.log("User found:", user);
+
+        if(user.skills==null){
+            user.skills.push(...skills);
+            await user.save()
+     
+        }else{
+            user.skills = []
+            user.skills = skills
+            await user.save()
+        }
+
+        res.json({message:"Skills saved successfully!"})
+        
+    }catch(err){
         res.status(500).json({message:"Server Error",error:err})
     }
 })
