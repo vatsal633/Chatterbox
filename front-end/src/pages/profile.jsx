@@ -5,6 +5,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaBars, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import axios from "axios";  // Import axios
+import Editsvg from '../assets/edit.svg';
 
 
 const Profile = () => {
@@ -16,6 +17,7 @@ const Profile = () => {
   const sidebarRef = useRef(null);
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
+  const [Phonenum, setPhonenum] = useState(null);
 
 
   // Fetch user data from the server
@@ -173,9 +175,12 @@ const Profile = () => {
             <MdOutlineAlternateEmail className="text-lg" />
             <span>vatsalmunjpara@mail.com</span>
           </div>
-          <div className="flex items-center text-gray-400 my-2 gap-2">
+          <div className="flex items-center text-gray-400 my-2 gap-2 justify-between">
+            <div className="flex items-center gap-2">
             <MdOutlineLocalPhone className="text-lg" />
-            <span>566545354</span>
+            <span>{!Phonenum&&('add your number')}</span>
+            </ div>
+            <img src={Editsvg} width={17} alt="" />
           </div>
           <div className="flex items-center text-gray-400 my-2 gap-2">
             <FaLocationDot className="text-lg" />
