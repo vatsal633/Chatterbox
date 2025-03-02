@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import 'dotenv/config'
 import cors from 'cors'
 import authRoutes from './routes/authRoutes.js'
-import practiceRoutes from './routes/practiceRoutes.js'
+
 
 const app = express()
 const port = process.env.PORT || 3000 
@@ -14,7 +14,7 @@ app.use(cors())
 
 // Routes
 app.use('/api/auth', authRoutes)
-app.use('/api/practice', practiceRoutes)
+
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/login', {

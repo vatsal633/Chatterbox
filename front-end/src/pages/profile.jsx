@@ -21,21 +21,21 @@ const Profile = () => {
 
 
   // Fetch user data from the server
-  useEffect(()=>{
-    const fetchUserdata = async ()=>{
-      try{
+  useEffect(() => {
+    const fetchUserdata = async () => {
+      try {
         const response = await axios.get(`http://localhost:3000/api/auth/user/${username}`);
         setUserData(response.data);
         // console.log("Fetched User Data:", response.data); 
-      } catch(e){
+      } catch (e) {
         console.error("Error fetching user data:", e);
-      }finally{
+      } finally {
         console.log("User Data Fetched")
       }
     }
 
-  fetchUserdata();
-  },[username]);
+    fetchUserdata();
+  }, [username]);
 
   // Load skills from localStorage when component mounts
   useEffect(() => {
@@ -52,8 +52,8 @@ const Profile = () => {
       setSkills([]); // Fallback to empty array
     }
   }, [username]);
-  
-  
+
+
 
   const addSkill = () => {
     if (newSkill.trim() !== "" && !skills.includes(newSkill)) {
@@ -86,29 +86,29 @@ const Profile = () => {
   };
 
   // remove the authentication token from local storage and redirect to login page
-  const handleLogout = ()=>{
+  const handleLogout = () => {
     localStorage.removeItem("isLoggedin");
     navigate("/");
   }
 
 
   // saving skiils to database
-  const saveskilldb = async() => {
-    try{
-        const response = await axios.post('http://localhost:3000/api/auth/add-skill',{username,skills})
+  const saveskilldb = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/api/auth/add-skill', { username, skills })
 
-      if(response.status === 200){
+      if (response.status === 200) {
         console.log("Skills saved successfully!");
       }
 
 
-      if(response.status===400){
+      if (response.status === 400) {
         console.log("Skills cannot be empty");
       }
 
 
-    }catch(err){
-        console.log("error saving skills:",err);
+    } catch (err) {
+      console.log("error saving skills:", err);
     }
   }
 
@@ -124,9 +124,8 @@ const Profile = () => {
 
       <aside
         ref={sidebarRef}
-        className={`absolute md:relative z-50 w-64 bg-gray-800 p-6 transition-transform transform ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-        } md:block fixed h-full top-0 left-0 md:h-auto md:static`}
+        className={`absolute md:relative z-50 w-64 bg-gray-800 p-6 transition-transform transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+          } md:block fixed h-full top-0 left-0 md:h-auto md:static`}
       >
         <h1 className="text-2xl text-center my-3 text-white">Dashboard</h1>
         {/* Dashboard Navigation */}
@@ -177,10 +176,19 @@ const Profile = () => {
           </div>
           <div className="flex items-center text-gray-400 my-2 gap-2 justify-between">
             <div className="flex items-center gap-2">
-            <MdOutlineLocalPhone className="text-lg" />
-            <span>{!Phonenum&&('add your number')}</span>
+              <MdOutlineLocalPhone className="text-lg" />
+              <span>{!Phonenum && ('add your number')}</span>
             </ div>
+
+            {/* popup div */}
+          
+            {/* popup div */}
+            
+            <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+             
             <img src={Editsvg} width={17} alt="" />
+            </button>
+
           </div>
           <div className="flex items-center text-gray-400 my-2 gap-2">
             <FaLocationDot className="text-lg" />
