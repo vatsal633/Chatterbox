@@ -16,6 +16,7 @@ import Profile from './pages/profile';
 import Practice from './pages/practice';
 import Languagepage from './pages/languages/languagepage';
 import ProtectedRoute from './components/ProtectedRoute';
+import CodeEditor from './pages/codeeditor';
 
 const router = createBrowserRouter([
   {
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
   {
     path: "/:username/practice/:language",
     element: <ProtectedRoute><Languagepage /></ProtectedRoute>
+  },
+  {
+    path:'/:username/practice/:language/:question',
+    element: <ProtectedRoute><CodeEditor/></ProtectedRoute> 
   }
   
 ]);
