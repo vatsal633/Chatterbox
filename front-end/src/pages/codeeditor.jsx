@@ -75,7 +75,9 @@ const CodeEditor = () => {
   //this fucntion handle the user statistics when user submit the right question and update the user statistics
   const handleUpdateState = async () => {
     try {
-        let solved_question = 1;
+        let solved_question = 0;
+
+        solved_question += 1
         console.log("🔍 Sending Request with:", { username, solved_question });
 
         let response = await axios.post(`http://localhost:3000/states/${username}/update-states`, {

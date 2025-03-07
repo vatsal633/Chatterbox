@@ -1,7 +1,15 @@
 import express from 'express';
 import { Login } from '../models/Login.js';
+import mongoose from 'mongoose';
 
 const router = express.Router();
+
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/login',{
+    useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(()=>{console.log("login database connected")})
+.catch((err)=>{console.log("error while connecting login database",err)})
 
 //get api for fetch data from database
 router.get('/user/:username', async (req, res) => {

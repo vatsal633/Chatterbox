@@ -18,20 +18,6 @@ app.use(cors());
 //   useUnifiedTopology: true,
 // });
 
-// logindb.on('connected', () => console.log('✅ Login Database connected'));
-// logindb.on('error', (err) => console.error('❌ Error connecting to login database:', err));
-
-// Connect to User States Database
-const userstatedb = mongoose.createConnection(process.env.MONGO_URI || 'mongodb://localhost:27017/statistics', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-userstatedb.on('connected', () => console.log('✅ User States Database connected'));
-userstatedb.on('error', (err) => console.error('❌ Error connecting to user states database:', err));
-
-// Export database connections
-export { userstatedb };
 
 // Routes
 app.use('/api/auth', authRoutes);

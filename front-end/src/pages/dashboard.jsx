@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
 import { FaUserCircle, FaSignOutAlt, FaBars } from "react-icons/fa";
 import { Link, useLocation, useParams } from "react-router-dom";
@@ -11,9 +12,11 @@ const Dashboard = () => {
   // const user_name = location.state?.username || "Guest";
   const [Username, setUsername] = useState("")
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [solved,Setsloved] = useState(0)
   const sidebarRef = useRef(null);
+
   const navigate = useNavigate()
-  
+
 
   // checks in local storage
   // useEffect(() => {
@@ -46,6 +49,24 @@ const Dashboard = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [])
 
+
+  useEffect(() => {
+    async function fetch_data() {
+      try {
+        let response = await axios.get(`http://localhost:3000/states/${username}/get-states`)
+
+        if (response.status === 200) {
+          let userdata = response.data
+          console.log("success",response.data)
+          Setsloved(userdata.solved_question)
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    fetch_data();
+  }, [])
+
   const goToSettings = () => {
     navigate(`/${username}/settings`);
   };
@@ -54,12 +75,12 @@ const Dashboard = () => {
   console.log(`username is ${username}`)
 
 
-  const handleLogout = ()=>{
+  const handleLogout = () => {
     localStorage.removeItem("isLoggedin");
     navigate("/");
   }
 
-  const handleCountinuePractice = ()=>{
+  const handleCountinuePractice = () => {
     navigate(`/${username}/practice`);
   }
 
@@ -75,7 +96,7 @@ const Dashboard = () => {
           <FaBars />
         </button>
       </div>
-      
+
 
       <aside
         ref={sidebarRef}
@@ -110,10 +131,10 @@ const Dashboard = () => {
 
       {/* Main Dashboard */}
       <main className="flex-1 p-6 md:p-8">
-  
+
         <h1 className="text-3xl font-bold">Welcome,{Username} </h1>
         <p className="text-gray-400 mt-2">Track your progress and continue learning.
-        
+
         </p>
 
 
@@ -152,7 +173,7 @@ const Dashboard = () => {
             {/* Solved Questions */}
             <div className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] p-4 rounded-lg text-center shadow-md">
               <h3 className="text-xl font-semibold text-white">✅ Solved</h3>
-              <p className="text-4xl font-semibold text-[#00c6ff]">120</p>
+              <p className="text-4xl font-semibold text-[#00c6ff]">{solved}</p>
             </div>
 
             {/* Attempted Questions */}
