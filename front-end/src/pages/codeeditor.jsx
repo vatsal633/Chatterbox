@@ -16,7 +16,8 @@ const CodeEditor = () => {
   const [description, setDescription] = useState("");
   const [output, setOutput] = useState("");
   const [input, setInput] = useState("");
-  const [Language,setLanguage] = useState("")
+  const [Language, setLanguage] = useState("")
+  
 
 
   //loading the states like question des input output sent by language.jsx 
@@ -63,7 +64,7 @@ const CodeEditor = () => {
         } else {
           alert('Your code is incorrect');
         }
-        
+
       }
 
     } catch (err) {
@@ -75,42 +76,45 @@ const CodeEditor = () => {
   //this fucntion handle the user statistics when user submit the right question and update the user statistics
   const handleUpdateState = async () => {
     try {
-        let solved_question = 0;
+      let solved_question = 0;
 
-        solved_question += 1
-        console.log("🔍 Sending Request with:", { username, solved_question });
+      solved_question += 1
+      console.log("🔍 Sending Request with:", { username, solved_question });
 
-        let response = await axios.post(`http://localhost:3000/states/${username}/update-states`, {
-            username,
-            solved_question
-        });
+      let response = await axios.post(`http://localhost:3000/states/${username}/update-states`, {
+        username,
+        solved_question
+      });
 
-        if (response.status === 200 || response.status === 201) {
-            console.log('✅ States updated successfully:', response.data);
-        }
+      if (response.status === 200 || response.status === 201) {
+        console.log('✅ States updated successfully:', response.data);
+      }
     } catch (err) {
-        console.error("❌ Error while connecting:", err.response?.data || err.message);
+      console.error("❌ Error while connecting:", err.response?.data || err.message);
     }
-};
+  };
 
 
   //function for run the code in editor
   const handlerun = async () => {
     try {
-      let prompt = `what is the output of this question ${question} if the input is ${input} give me only output dont give anything just output`
+      let prompt = `what is the output of this question ${question} if the input is ${input} give me only output dont give anything just output `
       const model = GenAI.getGenerativeModel({ model: "gemini-1.5-flash" })
       const response = await model.generateContent(prompt)
       const text = response.response.candidates[0].content.parts[0].text || "No response received."
 
       console.log(text)
+      
 
     } catch (err) {
       console.log("facing some issue wile run the programm", err)
     }
   }
 
+
+
   return (
-    <div className="flex flex-col h-screen bg-[#212426] text-white">
+    <div className="flex flex-col h-screen bg-[#212426] text-white ">
       {/* Header */}
       <div className="flex justify-between items-center bg-[#212426] p-4 ">
         <h2 className="text-xl font-bold text-cyan-400">
@@ -187,6 +191,15 @@ const CodeEditor = () => {
         <button className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white font-semibold transition" onClick={handleOnSubmit}>
           Submit
         </button>
+      </div>
+
+
+      {/* code execution area */}
+
+      <div className="bg-[#191b1c] flex p-4">
+        <div className="h-16">
+          {input}
+        </div>
       </div>
     </div>
   );

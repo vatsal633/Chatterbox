@@ -57,7 +57,7 @@ const Dashboard = () => {
 
         if (response.status === 200) {
           let userdata = response.data
-          console.log("success",response.data)
+          // console.log("success",response.data)
           Setsloved(userdata.solved_question)
         }
       } catch (err) {
@@ -72,7 +72,7 @@ const Dashboard = () => {
   };
 
 
-  console.log(`username is ${username}`)
+  // console.log(`username is ${username}`)
 
 
   const handleLogout = () => {
