@@ -18,6 +18,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [Phonenum, setPhonenum] = useState(null);
+  const [Email,SetEmail] = useState("")
 
 
   // Fetch user data from the server
@@ -26,16 +27,26 @@ const Profile = () => {
       try {
         const response = await axios.get(`http://localhost:3000/api/auth/user/${username}`);
         setUserData(response.data);
-        // console.log("Fetched User Data:", response.data); 
+        console.log("Fetched User Data:", response.data); 
       } catch (e) {
         console.error("Error fetching user data:", e);
       } finally {
         console.log("User Data Fetched")
       }
     }
-
     fetchUserdata();
   }, [username]);
+
+
+  //saving fetched data from db to email state
+  useEffect(() => {
+    try{
+      console.log("Updated userData:", userData.email);
+      SetEmail(userData.email)
+    }catch(err){
+      console.log(err)
+    }
+  }, [userData]);
 
   // Load skills from localStorage when component mounts
   useEffect(() => {
@@ -164,7 +175,7 @@ const Profile = () => {
             <h2 className="text-3xl font-semibold">{username}</h2>
             <span className="text-gray-400">🇮🇳</span>
           </div>
-          <div className="text-gray-400 text-center my-2">{username}@gmail.com</div>
+          <div className="text-gray-400 text-center my-2">{Email}</div>
         </div>
 
         {/* Personal Information */}
@@ -172,7 +183,7 @@ const Profile = () => {
           <h1 className="text-2xl mb-4">Personal Information</h1>
           <div className="flex items-center text-gray-400 my-2 gap-2">
             <MdOutlineAlternateEmail className="text-lg" />
-            <span>vatsalmunjpara@mail.com</span>
+            <span>{Email}</span>
           </div>
           <div className="flex items-center text-gray-400 my-2 gap-2 justify-between">
             <div className="flex items-center gap-2">

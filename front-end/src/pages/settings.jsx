@@ -3,15 +3,15 @@ import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
 import Back from '../assets/back.svg'
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
- 
+
 const Settings = () => {
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const sidebarRef = useRef();
   const navigate = useNavigate();
-  const {username} = useParams()
+  const { username } = useParams()
 
   // Add useRef for input fields leter used in useEffect to show the data
   const username_ref = useRef()
@@ -29,45 +29,65 @@ const Settings = () => {
   }, []);
 
   //add useeffect to show the data to input field
-  useEffect(()=>{
+  useEffect(() => {
     username_ref.current.value = username
-    let stored_name = JSON.parse(localStorage.getItem(username))
-    email_ref.current.value = stored_name.email
+    // let stored_name = JSON.parse(localStorage.getItem(username))
+    // email_ref.current.value = stored_name.email
+
+    async function fetchdata() {
+      try {
+        let response = await axios.get(`http://localhost:3000/api/auth/user/${username}`);
+        // console.log("userdata:",response.data)
+
+        let email = response.data.email
+        email_ref.current.value = email
+      } catch (err) {
+        console.log("error while fetching data : ", err)
+      }
+    }
+
+    fetchdata();
   })
 
   const handleChange = () => {
-    try{
-      let stored_name = JSON.parse(localStorage.getItem(username))
-      stored_name.email = email_ref.current.value
-      stored_name.username = username_ref.current.value
-      localStorage.setItem(username_ref.current.value,JSON.stringify(stored_name))
-    }catch(e){
-        console.log(e)
+    try {
+      // let stored_name = JSON.parse(localStorage.getItem(username))
+      // stored_name.email = email_ref.current.value
+      // stored_name.username = username_ref.current.value
+      // localStorage.setItem(username_ref.current.value,JSON.stringify(stored_name))
+      let name = username
+      let email = email_ref.current.value
+      let response = axios.put('http://localhost:3000/api/auth/update-name',{name,email});
+
+
+    } catch (e) {
+      console.log(e)
     }
   }
 
 
   //fetch api to change the password
-  const changepass = async () => { 
-    try{
+  const changepass = async () => {
+    try {
       let old_password = document.getElementById('oldpassword').value
       let new_password = document.getElementById('newpassword').value
 
 
-      if(!old_password || !new_password){
+      if (!old_password || !new_password) {
         alert("All fields are required")
       }
 
-      
 
 
-      const  response = axios.put(`http://localhost:3000/api/auth/update-password`,{email:email_ref.current.value,
-        oldpassword:old_password,
-        newpassword:new_password
+
+      const response = axios.put(`http://localhost:3000/api/auth/update-password`, {
+        email: email_ref.current.value,
+        oldpassword: old_password,
+        newpassword: new_password
       })
 
       alert("Password Updated")
-    }catch(err){
+    } catch (err) {
       console.log(err)
     }
   }
@@ -93,12 +113,12 @@ const Settings = () => {
 
         {/* Dashboard Navigation */}
         <nav>
-          <div className="flex" onClick={()=>{
+          <div className="flex" onClick={() => {
             navigate(`/${username}/dashboard`)
           }}>
 
-          <img src={Back}alt="" width={20}/>
-          <span className="text-xl flex items-center gap-3 my-4 hover:text-white text-gray-300">Back To dashboard</span>
+            <img src={Back} alt="" width={20} />
+            <span className="text-xl flex items-center gap-3 my-4 hover:text-white text-gray-300">Back To dashboard</span>
           </div>
         </nav>
 
@@ -107,15 +127,15 @@ const Settings = () => {
 
       {/* Main Content */}
       <main className="flex-1 p-6 space-y-6">
-        
+
         {/* Profile Settings */}
         <div id="profile" className="p-6 rounded-lg bg-[#111317] border shadow-lg">
           <h3 className="text-lg font-bold mb-4">Profile Settings</h3>
           <div className="flex items-center space-x-4 max-[933px]:flex-col">
             <div className="w-16 h-16 bg-gray-600 rounded-full  max-[933px]:mb-4"></div>
             <div className="space-y-2">
-              <input type="text" placeholder="Full Name" className="w-full p-2 border border-gray-600 rounded  text-white" ref={username_ref}/>
-              <input type="email" placeholder="Email Address" className="w-full p-2 border border-gray-600 rounded  text-white" ref={email_ref}/>
+              <input type="text" placeholder="Full Name" className="w-full p-2 border border-gray-600 rounded  text-white" ref={username_ref} />
+              <input type="email" placeholder="Email Address" className="w-full p-2 border border-gray-600 rounded  text-white" ref={email_ref} />
               <button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={handleChange}>Save Changes</button>
             </div>
           </div>

@@ -15,19 +15,19 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/login',{
 router.get('/user/:username', async (req, res) => {
     try {
         const username = req.params.username.trim().toLowerCase();
-        console.log("Searching for user:", username);
+        // console.log("Searching for user:", username);
 
         const user = await Login.findOne({ name: { $regex: new RegExp(`^${username}$`, 'i') } });
                    
         //just for debugging
-        console.log(" Query Result:", user);
+        // console.log(" Query Result:", user);
 
         if (!user) {
             console.log(" User not found in database");
             return res.status(404).json({ message: 'User not found' });
         }
 
-        console.log(" User found:", user);
+        // console.log(" User found:", user);
         res.json(user);
     } catch (err) {
         console.error(" Server error:", err);
@@ -84,7 +84,7 @@ router.put('/update-password', async (req, res) => {
         res.json({message:"Password updated successfully"})
 
     }catch(err){
-        onsole.error("Server error:", err);
+        console.error("Server error:", err);
         res.status(500).json({message:"Server Error",error:err})
     }
 })
@@ -124,6 +124,27 @@ router.post('/add-skill',async(req,res)=>{
         
     }catch(err){
         res.status(500).json({message:"Server Error",error:err})
+    }
+})
+
+
+router.put('/update-name',async(req,res)=>{
+    try{
+
+        const {name,email} = req.body
+        
+        let user = await Login.findOne({name:name})
+        
+        if(user){
+            user.name = name
+            user.email = email
+            await user.save()
+            
+            res.status(200).json({message:"username and email update successfully"})
+        }
+    }catch(err){
+        console.log("error while updating data");
+        res.status(500).json({message:"facing some error while updating the data"})
     }
 })
 

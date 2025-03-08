@@ -17,7 +17,7 @@ const CodeEditor = () => {
   const [output, setOutput] = useState("");
   const [input, setInput] = useState("");
   const [Language, setLanguage] = useState("")
-  
+
 
 
   //loading the states like question des input output sent by language.jsx 
@@ -104,7 +104,7 @@ const CodeEditor = () => {
       const text = response.response.candidates[0].content.parts[0].text || "No response received."
 
       console.log(text)
-      
+
 
     } catch (err) {
       console.log("facing some issue wile run the programm", err)
@@ -196,9 +196,17 @@ const CodeEditor = () => {
 
       {/* code execution area */}
 
-      <div className="bg-[#191b1c] flex p-4">
-        <div className="h-16">
+      <div className="bg-[#191b1c] flex-col flex p-4">
+        <div className="h-16 ">
+
+          <div className="text-cyan-400 font-bold text-lg">Input</div>
           {input}
+
+          <div className="text-cyan-400 font-bold text-lg">Expected output</div>
+          {output}
+
+          <div className="text-cyan-400 font-bold text-lg">Your  output</div>
+          {output}
         </div>
       </div>
     </div>

@@ -23,6 +23,9 @@ const Signin = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    
+    setError(""); // Reset error on new attempt
+    setSuccess("");
 
     let username = userRef.current.value.trim();
     let email = emailRef.current.value.trim();
@@ -53,6 +56,7 @@ const Signin = () => {
       console.log(response.data)
       setSuccess("Account created successfully! Redirecting...");
       setError("");
+      console.log("register sucessfully")
       setTimeout(() => navigate("/login"), 2000);
     }catch(err){ 
       console.error("Registration Error:", err.response?.data?.message || err.message);
