@@ -60,6 +60,10 @@ const Dashboard = () => {
           // console.log("success",response.data)
           Setsloved(userdata.solved_question)
         }
+
+        if(response.status===400){
+          console.log("user not found")
+        }
       } catch (err) {
         console.log(err)
       }

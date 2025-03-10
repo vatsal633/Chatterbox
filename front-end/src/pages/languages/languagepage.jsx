@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Menu, Stethoscope } from "lucide-react";
 import dotenv from 'dotenv'
 import { GoogleGenerativeAI } from '@google/generative-ai'
+import axios from "axios";
 
 
 const LanguagePage = () => {
@@ -118,7 +119,9 @@ const LanguagePage = () => {
    
 
     //sending the information in code editor
-    const solvequestion = (topic, number) => {
+    const solvequestion = async(topic, number) => {
+        
+
         let des = '';
         let input = ''
         let output = ''
@@ -227,7 +230,9 @@ const LanguagePage = () => {
                             <div className="flex justify-between">
 
                                 <p className="text-gray-300">{value}</p> {/* Display the actual question */}
-                                <button className="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg transition-all" onClick={() => solvequestion(value, index)}>
+                                <button className="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg transition-all" onClick={
+                                    () => {solvequestion(value, index)}
+                                    }>
                                     Solve Question
                                 </button>
                             </div>

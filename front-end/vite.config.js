@@ -7,8 +7,8 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [
     react(),
-    tailwindcss()
-  ],
+    tailwindcss(),
+ ],
 
   server: {
     allowedHosts: ['cc4f-103-240-204-43.ngrok-free.app'], // Update ngrok URL

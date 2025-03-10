@@ -16,6 +16,7 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/statistics'
 router.post('/:username/update-states', async (req, res) => {
     try {
         const { username, solved_question } = req.body;
+        
 
         // Update existing user stats or create a new one
         const updatedUser = await userStates.findOneAndUpdate(
@@ -48,6 +49,23 @@ router.get('/:username/get-states', async (req, res) => {
     } catch (err) {
         console.error('❌ Error while fetching states:', err);
         res.status(500).json({ message: "Server error" });
+    }
+});
+
+
+router.post('/:username/update-attempt',async (req,res)=>{
+    try{
+        const {username} = req.params;
+        
+        console.log(username)
+
+        let user = await userStates.findOne({username})
+
+        if(!user){
+            console.log("user not found in database")
+        }
+    }catch(err){
+        res.send(500).json({message:"server error"})
     }
 });
 
