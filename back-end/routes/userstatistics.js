@@ -8,20 +8,25 @@ const router = express.Router()
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/statistics', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  }).then(()=>{console.log("userstate connect")})
-  .catch((err)=>{console.log("error while connection userstate database",err)})
+}).then(() => { console.log("userstate connect") })
+    .catch((err) => { console.log("error while connection userstate database", err) })
 
 
 //update states
 router.post('/:username/update-states', async (req, res) => {
     try {
         const { username, solved_question } = req.body;
-        
+
+        const user = await userStates.findOne({username})
+
+        user.success_rate = (user.solved_question / user.attempted_question)*100; 
+
+        await user.save()
 
         // Update existing user stats or create a new one
         const updatedUser = await userStates.findOneAndUpdate(
             { username },  // Search for the user by username
-            { $inc: { solved_question: solved_question || 1 } }, // Increment solved_question
+            { $inc: { solved_question: solved_question || 1 } },// Increment solved_question
             { upsert: true, new: true }  // Create if not exists, return updated doc
         );
 
@@ -38,7 +43,7 @@ router.post('/:username/update-states', async (req, res) => {
 router.get('/:username/get-states', async (req, res) => {
     try {
         const username = req.params.username;
-        
+
         let user = await userStates.findOne({ username });
 
         if (!user) {
@@ -53,19 +58,43 @@ router.get('/:username/get-states', async (req, res) => {
 });
 
 
-router.post('/:username/update-attempt',async (req,res)=>{
-    try{
-        const {username} = req.params;
-        
+router.post('/:username/update-attempt', async (req, res) => {
+    try {
+        const { username } = req.params;
+
         console.log(username)
 
-        let user = await userStates.findOne({username})
+        let user = await userStates.findOne({ username })
 
-        if(!user){
-            console.log("user not found in database")
+        //create database 
+        if (!user) {
+            const new_user = new userStates({ username: username, solved_question: 0, attempted_question: 1, success_rate: 0 })
+
+            await new_user.save();
         }
-    }catch(err){
-        res.send(500).json({message:"server error"})
+
+
+        // //updating attempted quetion in existing user
+        else {
+            try {
+
+                const existingUser = await userStates.findOne({ username })
+                console.log("user found! you are ", existingUser);
+
+                existingUser.attempted_question += 1;
+                
+                await existingUser.save()
+
+                console.log("attempt update success")
+
+            }catch(err){
+                console.log("facing some issue while updating attempted")
+                res.status(500).josn({message:"server error"})
+            }
+          
+        }
+    } catch (err) {
+        res.send(500).json({ message: "server error" })
     }
 });
 

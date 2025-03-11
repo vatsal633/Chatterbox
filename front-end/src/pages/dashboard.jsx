@@ -13,7 +13,9 @@ const Dashboard = () => {
   const [Username, setUsername] = useState("")
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [solved,Setsloved] = useState(0)
+  const [attempted_question,SetAttempted_question] = useState();
   const sidebarRef = useRef(null);
+  const [width,Setwidth] = useState(0)// for sucess rate bar
 
   const navigate = useNavigate()
 
@@ -50,6 +52,7 @@ const Dashboard = () => {
   }, [])
 
 
+  // fetching user statistics form database
   useEffect(() => {
     async function fetch_data() {
       try {
@@ -59,6 +62,9 @@ const Dashboard = () => {
           let userdata = response.data
           // console.log("success",response.data)
           Setsloved(userdata.solved_question)
+          SetAttempted_question(userdata.attempted_question)
+          Setwidth(userdata.success_rate)//set the sucess bar acording to success rate
+          
         }
 
         if(response.status===400){
@@ -87,6 +93,8 @@ const Dashboard = () => {
   const handleCountinuePractice = () => {
     navigate(`/${username}/practice`);
   }
+
+
 
 
   // Handle click outside sidebar to close
@@ -183,16 +191,16 @@ const Dashboard = () => {
             {/* Attempted Questions */}
             <div className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] p-4 rounded-lg text-center shadow-md">
               <h3 className="text-xl font-semibold text-white">🔄 Attempted</h3>
-              <p className="text-4xl font-bold text-[#FF9800]">150</p>
+              <p className="text-4xl font-bold text-[#FF9800]">{attempted_question}</p>
             </div>
 
             {/* Success Rate */}
             <div className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] p-4 rounded-lg text-center shadow-md">
               <h3 className="text-xl font-semibold text-white">📈 Success Rate</h3>
               <div className="relative w-full bg-gray-700 h-4 rounded-full mt-2">
-                <div className="absolute top-0 left-0 h-4 bg-[#00c6ff] rounded-full" style={{ width: "80%" }}></div>
+                <div className="absolute top-0 left-0 h-4 bg-[#00c6ff] rounded-full" style={{ width: `${width}%`}}></div>
               </div>
-              <p className="text-sm text-gray-400 mt-1">80% correct</p>
+              <p className="text-sm text-gray-400 mt-1">{width}% correct</p>
             </div>
 
             {/* Streak */}
