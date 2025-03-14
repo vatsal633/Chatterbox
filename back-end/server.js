@@ -4,6 +4,7 @@ import 'dotenv/config';
 import cors from 'cors';
 import authRoutes from './routes/authRoutes.js';
 import userstatistics from './routes/userstatistics.js';
+import recentact from './routes/recentactRoutes.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -22,10 +23,11 @@ app.use(cors());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/states', userstatistics);
+app.use('/recent',recentact)
 
 // Default Route
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('Hello World! from codeQuest');
 });
 
 // Start Server

@@ -35,8 +35,6 @@ const LanguagePage = () => {
 
     //ai generation logic
 
-
-
     //handle wrong language
     useEffect(() => {
         if (!supportedLanguages.includes(language)) {
@@ -45,7 +43,32 @@ const LanguagePage = () => {
     }, [language, navigate]);
     const capitalize = (text) => text.charAt(0).toUpperCase() + text.slice(1);
 
+    //updating recent activites database
+    useEffect(() => {
 
+        const updateAct = async () => {
+
+            try {
+                let response = await axios.post(`http://localhost:3000/recent/update-recentact`, { username, language, topic })
+
+                console.log(response.data)
+
+            } catch (err) {
+                console.log("server error", err)
+            }
+        }
+
+        if (topic) {  // Only run when a valid topic exists
+            updateAct();
+        }
+    },[username,language,topic])
+
+    //storing question in local storage
+    useEffect(()=>{
+        console.log(questions)
+
+
+    },[questions])
 
     //ai generated questions login here
     // dotenv.config()
@@ -76,7 +99,7 @@ const LanguagePage = () => {
             "input": "Example input values.",
             "output": "Expected output."
         }
-        Return only a JSON array without any extra text or formatting and dont repeat questions.`;//making frame of the question
+        Return only a JSON array without any extra text or formatting and dont repeat questions you are reapeat the question i say dont reapeat .`;//making frame of the question
             const model = GenAI.getGenerativeModel({ model: "gemini-1.5-flash" })//init model
             const response = await model.generateContent(prompt)//pasing the question
 
@@ -151,7 +174,7 @@ const LanguagePage = () => {
 
 
         } catch (err) {
-            console.log("error while connecting ",err);
+            console.log("error while connecting ", err);
         }
     }
 
@@ -187,7 +210,7 @@ const LanguagePage = () => {
                         <li
                             key={index}
                             className="p-2 bg-gray-700 rounded-lg hover:bg-cyan-600 transition-all duration-200 cursor-pointer"
-                            onClick={() => read(topic)}
+                            onClick={() => { read(topic) }}
                         >
                             {topic}
                         </li>

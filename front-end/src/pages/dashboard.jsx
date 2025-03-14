@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Axis3D } from 'lucide-react';
 import React, { useEffect, useState, useRef } from 'react';
 import { FaUserCircle, FaSignOutAlt, FaBars } from "react-icons/fa";
 import { Link, useLocation, useParams } from "react-router-dom";
@@ -16,6 +17,11 @@ const Dashboard = () => {
   const [attempted_question,SetAttempted_question] = useState();
   const sidebarRef = useRef(null);
   const [width,Setwidth] = useState(0)// for sucess rate bar
+
+
+  //state for displaying recent activity 
+  const [recent_lang,setrecent_lang] = useState("sdfsd")
+  const [recent_topic,setrecent_topic] = useState("dsfs")
 
   const navigate = useNavigate()
 
@@ -58,6 +64,8 @@ const Dashboard = () => {
       try {
         let response = await axios.get(`http://localhost:3000/states/${username}/get-states`)
 
+        let response2 = await axios.get(`http://localhost:3000/recent/${username}/get-recentact`)
+
         if (response.status === 200) {
           let userdata = response.data
           // console.log("success",response.data)
@@ -67,9 +75,16 @@ const Dashboard = () => {
           
         }
 
-        if(response.status===400){
-          console.log("user not found")
+        
+        //displaying recent activities to dashboard
+        if (response2.status === 200 && response2.data?.data?.language && response2.data?.data?.topic) {
+          setrecent_lang(response2.data.data.language)
+          setrecent_topic(response2.data.data.topic)
+        } else {
+          console.log("User's language data not available.");
         }
+
+
       } catch (err) {
         console.log(err)
       }
@@ -156,8 +171,8 @@ const Dashboard = () => {
           <div className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] p-6 rounded-lg shadow-lg">
             <h2 className='text-2xl text-center my-1.5'>Currently Learning</h2>
             <div className='border w-full opacity-25  mb-2'></div>
-            <h2 className="text-xl font-semibold">C Language</h2>
-            <p className="text-gray-400 mt-2">Loops & Control statement</p>
+            <h2 className="text-xl font-semibold">{recent_lang}</h2>
+            <p className="text-gray-400 mt-2">{recent_topic}</p>
             <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg" onClick={handleCountinuePractice}>
               Continue Practice
             </button>

@@ -6,6 +6,15 @@ const Practice = () => {
   const navigate = useNavigate();
   const { username } = useParams();
 
+  
+
+  //redirect user to specific language practice page
+  const handlechange = (language)=>{
+    setTimeout(() => {
+      navigate(`/${username}/practice/${language}`)
+    }, 1500);
+  }
+
   return (
     <>
       <Navbar />
@@ -15,28 +24,32 @@ const Practice = () => {
         </div>
         <div className="flex max-[532px]:flex-col gap-3 text-white">
           <button
-            onClick={() => navigate(`/${username}/practice/c`)}
+            onClick={()=>{handlechange("c")}}
             className="bg-[#111317] px-6 text-3xl rounded-md"
           >
             C
           </button>
           <button
-            onClick={() => navigate(`/${username}/practice/cpp`)}
+            onClick={()=>{handlechange("cpp")}}
             className="bg-[#111317] p-4 text-3xl rounded-md"
           >
             C++
           </button>
           <button
-            onClick={() => navigate(`/${username}/practice/python`)}
+            onClick={()=>{handlechange("python")}}
             className="bg-[#111317] p-4 text-3xl rounded-md"
           >
             Python
           </button>
           <button
-            onClick={() => navigate(`/${username}/practice/javascript`)}
+            onClick={()=>{handlechange("javascript")}}
             className="bg-[#111317] p-4 text-3xl rounded-md"
           >
             JavaScript
+          </button>
+
+          <button onClick={()=>handlechange("jaddsff")}>
+            hllow 
           </button>
         </div>
       </div>
