@@ -61,14 +61,15 @@ const LanguagePage = () => {
         if (topic) {  // Only run when a valid topic exists
             updateAct();
         }
-    },[username,language,topic])
+    }, [username, language, topic])
 
     //storing question in local storage
+    
     useEffect(()=>{
-        console.log(questions)
-
-
-    },[questions])
+        if(setQuestion!=null && everyquestion!=null){
+            localStorage.setItem('question',JSON.stringify(everyquestion))
+        }
+    },[setQuestion])
 
     //ai generated questions login here
     // dotenv.config()
@@ -119,11 +120,6 @@ const LanguagePage = () => {
             //storing  the josn question in state
             setQuestion(parsedQuestions)//storing the json file generate by ai
             setGenerate(false)
-
-
-
-
-
         } catch (err) {
             console.log(`error while generating question:${err}`)
         }

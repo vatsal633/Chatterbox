@@ -4,12 +4,12 @@ import mongoose from 'mongoose';
 
 const router = express.Router();
 
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/login',{
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/login', {
     useNewUrlParser: true,
-  useUnifiedTopology: true,
+    useUnifiedTopology: true,
 })
-.then(()=>{console.log("login database connected")})
-.catch((err)=>{console.log("error while connecting login database",err)})
+    .then(() => { console.log("login database connected") })
+    .catch((err) => { console.log("error while connecting login database", err) })
 
 //get api for fetch data from database
 router.get('/user/:username', async (req, res) => {
@@ -18,7 +18,7 @@ router.get('/user/:username', async (req, res) => {
         // console.log("Searching for user:", username);
 
         const user = await Login.findOne({ name: { $regex: new RegExp(`^${username}$`, 'i') } });
-                   
+
         //just for debugging
         // console.log(" Query Result:", user);
 
@@ -37,116 +37,140 @@ router.get('/user/:username', async (req, res) => {
 
 //post api for register user to database
 router.post('/register', async (req, res) => {
-    try{
+    try {
 
         const { name, email, password } = req.body;
         console.log(" Registering user:", name);
-        
+
         const existing_user = await Login.findOne({ name: { $regex: new RegExp(`^${name}$`, 'i') } }); // Case-insensitive search
-        
-        if(existing_user){
+
+        if (existing_user) {
             console.log(" User already exists");
             return res.status(400).json({ message: 'User already exists' });
         }
-        
+
         const newUser = new Login({ name, email, password });
         await newUser.save();
-    }catch(err){
+    } catch (err) {
         console.error(" Server error:", err);
         res.status(500).json({ message: 'Server Error', error: err });
-    }   
+    }
 })
 
 //update password routes
 router.put('/update-password', async (req, res) => {
-    try{
-        const {email,oldpassword,newpassword} = req.body
-        
-        if(!email || !oldpassword || !newpassword){
-            return res.status(400).json({message:"All fields are required"})
+    try {
+        const { email, oldpassword, newpassword } = req.body
+
+        if (!email || !oldpassword || !newpassword) {
+            return res.status(400).json({ message: "All fields are required" })
         }
-        
+
         //finding user by email form database
-        const user = await Login.findOne({email})
-        
-        if(!user){
-            return res.status(404).json({message:"User not found"})
+        const user = await Login.findOne({ email })
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" })
         }
 
 
-        if(user.password!== oldpassword){
+        if (user.password !== oldpassword) {
             return res.status(400).json({ message: "Incorrect old password" });
         }
 
         user.password = newpassword
         await user.save()
 
-        res.json({message:"Password updated successfully"})
+        res.json({ message: "Password updated successfully" })
 
-    }catch(err){
+    } catch (err) {
         console.error("Server error:", err);
-        res.status(500).json({message:"Server Error",error:err})
+        res.status(500).json({ message: "Server Error", error: err })
     }
 })
 
 
-router.post('/add-skill',async(req,res)=>{
-    try{
-        const {username,skills} = req.body
+router.post('/add-skill', async (req, res) => {
+    try {
+        const { username, skills } = req.body
 
-        let name = username
 
-        console.log("Adding skill for user:", name);
+        console.log("Adding skill for user:", username);
         console.log(skills)
 
-        if(skills == null){
-            return res.status(400).json({message:"Skills cannot be empty"})
+        if (skills == null) {
+            return res.status(400).json({ message: "Skills cannot be empty" })
         }
 
-        if(!name || !skills || skills.length===0){
-            return res.status(400).json({message:"All fields are required"})
+        if (!username || !skills || skills.length === 0) {
+            return res.status(400).json({ message: "All fields are required" })
         }
 
-        const user = await Login.findOne({name})
-        console.log("User found:", user);
+        const user = await Login.findOne({ name: username })
 
-        if(user.skills==null){
-            user.skills.push(...skills);
-            await user.save()
-     
-        }else{
-            user.skills = []
-            user.skills = skills
-            await user.save()
+        if (!user) {
+            console.log("user not found")
+        }
+        else {
+            console.log("User found:", user);
+
+
+            // Update skills correctly
+            user.skills = skills;  // No need to reassign an empty array before setting
+            await user.save();
+
+            res.status(200).json({ message: "✅ Skills saved successfully!" });
         }
 
-        res.json({message:"Skills saved successfully!"})
-        
-    }catch(err){
-        res.status(500).json({message:"Server Error",error:err})
+    } catch (err) {
+        res.status(500).json({ message: "Server Error", error: err })
     }
 })
 
 
-router.put('/update-name',async(req,res)=>{
-    try{
+router.put('/update-name', async (req, res) => {
+    try {
 
-        const {name,email} = req.body
-        
-        let user = await Login.findOne({name:name})
-        
-        if(user){
+        const { name, email } = req.body
+
+        let user = await Login.findOne({ name: name })
+
+        if (user) {
             user.name = name
             user.email = email
             await user.save()
-            
-            res.status(200).json({message:"username and email update successfully"})
+
+            res.status(200).json({ message: "username and email update successfully" })
         }
-    }catch(err){
+    } catch (err) {
         console.log("error while updating data");
-        res.status(500).json({message:"facing some error while updating the data"})
+        res.status(500).json({ message: "facing some error while updating the data" })
     }
 })
+
+
+router.post('/add-phone', async (req, res) => {
+    try {
+        const { name, Phonenum } = req.body;
+
+        let user = await Login.findOne({ name });
+
+           
+        if (!user) {
+            return res.status(404).send(`${name} user not found`);
+        }
+
+        else{
+            user.phone_num = Phonenum;
+            await user.save();
+            
+            res.status(200).json({ message: "Phone number updated successfully" });
+        }
+    } catch (err) {
+        res.status(500).json({ message: "Facing some issue while saving mobile data" });
+    }
+});
+
 
 
 export default router;

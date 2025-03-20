@@ -17,6 +17,8 @@ const CodeEditor = () => {
   const [output, setOutput] = useState("");
   const [input, setInput] = useState("");
   const [Language, setLanguage] = useState("")
+  const [userOutput, setUserOutput] = useState("")
+  const [Run, setRun] = useState(false)
 
 
 
@@ -98,13 +100,20 @@ const CodeEditor = () => {
   //function for run the code in editor
   const handlerun = async () => {
     try {
-      let prompt = `what is the output of this question ${question} if the input is ${input} give me only output dont give anything just output `
+      let prompt = `what is the output of this question ${question} if the input is ${input} give me only output dont give anything just output`
+
+
+      let prompt2 = `what is the output of this code ${code} give me only output dont give anything just output`
       const model = GenAI.getGenerativeModel({ model: "gemini-1.5-flash" })
       const response = await model.generateContent(prompt)
+      const response2 = await model.generateContent(prompt2)
       const text = response.response.candidates[0].content.parts[0].text || "No response received."
 
-      console.log(text)
+      const text2 = response2.response.candidates[0].content.parts[0].text || "No response received."
 
+      console.log(text2)
+      setUserOutput(text2)//store the user code output
+      setRun(true)//set true for showing result 
 
     } catch (err) {
       console.log("facing some issue wile run the programm", err)
@@ -195,8 +204,7 @@ const CodeEditor = () => {
 
 
       {/* code execution area */}
-
-      <div className="bg-[#191b1c] flex-col flex p-4">
+      {Run && (<div className="bg-[#191b1c] flex-col flex p-4">
         <div className="h-16 ">
 
           <div className="text-cyan-400 font-bold text-lg">Input</div>
@@ -206,9 +214,10 @@ const CodeEditor = () => {
           {output}
 
           <div className="text-cyan-400 font-bold text-lg">Your  output</div>
-          {output}
+          {userOutput}
         </div>
-      </div>
+      </div>)}
+
     </div>
   );
 };

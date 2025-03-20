@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, resolvePath, UNSAFE_ErrorResponseImpl, useNavigate } from "react-router-dom";
 import { MdOutlineAlternateEmail, MdOutlineLocalPhone } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaBars, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
@@ -18,7 +18,10 @@ const Profile = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [Phonenum, setPhonenum] = useState(null);
-  const [Email,SetEmail] = useState("")
+  const [Email, SetEmail] = useState("")
+  const [Show, setShow] = useState(false)
+  const [Error, setError] = useState(false)
+  const phoneref = useRef()
 
 
   // Fetch user data from the server
@@ -27,59 +30,78 @@ const Profile = () => {
       try {
         const response = await axios.get(`http://localhost:3000/api/auth/user/${username}`);
         setUserData(response.data);
-        console.log("Fetched User Data:", response.data); 
+        // console.log("Fetched User Data:", response.data);
+        if (response.data.phone_num != null) {
+
+          setPhonenum(response.data.phone_num)
+        }
+
+        else {
+          setPhonenum(null)
+        }
+
+        SetEmail(response.data.email)
       } catch (e) {
         console.error("Error fetching user data:", e);
       } finally {
-        console.log("User Data Fetched")
+        // console.log("User Data Fetched")
       }
     }
     fetchUserdata();
   }, [username]);
 
 
-  //saving fetched data from db to email state
-  useEffect(() => {
-    try{
-      console.log("Updated userData:", userData.email);
-      SetEmail(userData.email)
-    }catch(err){
-      console.log(err)
-    }
-  }, [userData]);
-
   // Load skills from localStorage when component mounts
+  // useEffect(() => {
+  //   const savedSkills = localStorage.getItem(`${username}_skills`);
+  //   try {
+  //     const parsedSkills = savedSkills ? JSON.parse(savedSkills) : [];
+  //     if (Array.isArray(parsedSkills)) {
+  //       setSkills(parsedSkills); // Ensure it's always an array
+  //     } else {
+  //       setSkills([]); // If it's not an array, reset to empty array
+  //     }
+  //   } catch (error) {
+  //     console.error("Error parsing skills from localStorage:", error);
+  //     setSkills([]); // Fallback to empty array
+  //   }
+  // }, [username]);
+
+
+  //fetch skills from db
   useEffect(() => {
-    const savedSkills = localStorage.getItem(`${username}_skills`);
-    try {
-      const parsedSkills = savedSkills ? JSON.parse(savedSkills) : [];
-      if (Array.isArray(parsedSkills)) {
-        setSkills(parsedSkills); // Ensure it's always an array
-      } else {
-        setSkills([]); // If it's not an array, reset to empty array
+    const fetch = async () => {
+      try {
+        let res = await axios.get(`http://localhost:3000/api/${username}/getskill`)
+        // console.log(res.data.skills)
+        if (res.data == null) {
+          setSkills([])
+        }
+        else{
+
+          setSkills(res.data)
+        }
+      } catch (err) {
+        console.log(err)
       }
-    } catch (error) {
-      console.error("Error parsing skills from localStorage:", error);
-      setSkills([]); // Fallback to empty array
     }
-  }, [username]);
+    fetch()
+  }, [username])
 
 
-
+  //adding skill client side
   const addSkill = () => {
     if (newSkill.trim() !== "" && !skills.includes(newSkill)) {
       setSkills((prevSkills) => [...prevSkills, newSkill]);
       setNewSkill(""); // Clear input after adding
     }
   };
-
+  //removing skill client side
   const removeSkill = (skill) => {
     setSkills((prevSkills) => prevSkills.filter((s) => s !== skill));
   };
 
-  const SaveSkill = () => {
-    localStorage.setItem(`${username}_skills`, JSON.stringify(skills));
-  };
+
 
   // Close sidebar when clicking outside
   useEffect(() => {
@@ -106,25 +128,32 @@ const Profile = () => {
   // saving skiils to database
   const saveskilldb = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/add-skill', { username, skills })
+      const response = await axios.post('http://localhost:3000/api/addskill', { username, skills })
 
-      if (response.status === 200) {
-        console.log("Skills saved successfully!");
-      }
-
-
-      if (response.status === 400) {
-        console.log("Skills cannot be empty");
-      }
-
+      console.log(response.data)
 
     } catch (err) {
       console.log("error saving skills:", err);
     }
   }
 
+
+  //saving mobile in db
+  const saveMobile = async () => {
+    try {
+      let response = await axios.post(`http://localhost:3000/api/auth/add-phone`, { name: username, Phonenum })
+
+      if (response.status === 200) {
+        console.log("success")
+      }
+    } catch (err) {
+      console.log("error while ")
+      setError(true)
+    }
+  }
+
   return (
-    <div className="flex min-h-screen bg-[#0b0f17] text-white flex-col md:flex-row">
+    <div className=" relative flex min-h-screen bg-[#0b0f17] text-white flex-col md:flex-row">
       {/* Sidebar */}
       <div className="w-full bg-gray-900 p-4 flex justify-between items-center md:hidden">
         <h1 className="text-xl font-bold text-white">Dashboard</h1>
@@ -188,16 +217,16 @@ const Profile = () => {
           <div className="flex items-center text-gray-400 my-2 gap-2 justify-between">
             <div className="flex items-center gap-2">
               <MdOutlineLocalPhone className="text-lg" />
-              <span>{!Phonenum && ('add your number')}</span>
+              <span>{!Phonenum ? ('add your number') : Phonenum}</span>
             </ div>
 
             {/* popup div */}
-          
+
             {/* popup div */}
-            
+
             <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-             
-            <img src={Editsvg} width={17} alt="" />
+
+              <img src={Editsvg} width={17} alt="" onClick={() => { setShow(!Show) }} />
             </button>
 
           </div>
@@ -215,7 +244,7 @@ const Profile = () => {
             <button
               onClick={() => {
                 setChange(!Change);
-                SaveSkill();
+                // SaveSkill();
                 saveskilldb();
               }}
               className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 rounded-lg px-5 py-2.5 mb-2"
@@ -243,6 +272,8 @@ const Profile = () => {
             </div>
           )}
 
+
+          {/* for displaying skills */}
           {skills.length === 0 ? (
             <p className="text-gray-400 mt-4">Add your relevant skills</p>
           ) : (
@@ -255,10 +286,55 @@ const Profile = () => {
               ))}
             </div>
           )}
+
         </div>
       </div>
 
-      
+
+
+
+      {/* popup for add phone*/}
+      {Show && (<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#29292e] p-5 scale-150 rounded-md ">
+        <div className="flex justify-between">
+          <h3 className="text-white">Add your Phone</h3>
+          <span className="hover:cursor-pointer" onClick={() => { setShow(!Show) }}>✖</span>
+        </div>
+
+        <input
+          type="number"
+          className="my-3 w-full p-2 bg-gray-800 text-white rounded-md appearance-none no-spinner"
+          placeholder="Enter here"
+          ref={phoneref}
+        />
+
+        <button className="block bg-blue-500 text-white px-4 py-2 rounded-md mt-2"
+          onClick={() => {
+            {
+              setPhonenum(phoneref.current.value)
+              saveMobile()
+            }
+
+          }}>
+          Save
+        </button>
+      </div>)}
+
+      {/* error popup */}
+      {Error && (<div className="absolute top-0 left-[50%] bg-[#29292e] p-5  rounded-md w-sm">
+        <div className="flex justify-between">
+
+          <span className="hover:cursor-pointer" onClick={() => { setError(false) }}>✖</span>
+        </div>
+
+        <h2 className="mt-8 text-2xl text-center text-red-300">
+          error while saving phone
+        </h2>
+
+
+      </div>)}
+
+
+
     </div>
   );
 };

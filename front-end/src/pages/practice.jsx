@@ -48,9 +48,7 @@ const Practice = () => {
             JavaScript
           </button>
 
-          <button onClick={()=>handlechange("jaddsff")}>
-            hllow 
-          </button>
+          
         </div>
       </div>
     </>

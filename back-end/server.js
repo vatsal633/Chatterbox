@@ -5,6 +5,7 @@ import cors from 'cors';
 import authRoutes from './routes/authRoutes.js';
 import userstatistics from './routes/userstatistics.js';
 import recentact from './routes/recentactRoutes.js';
+import skillsroute from './routes/skiilsroutes.js'
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -24,6 +25,7 @@ app.use(cors());
 app.use('/api/auth', authRoutes);
 app.use('/states', userstatistics);
 app.use('/recent',recentact)
+app.use('/api',skillsroute);
 
 // Default Route
 app.get('/', (req, res) => {
