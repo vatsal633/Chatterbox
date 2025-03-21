@@ -20,8 +20,8 @@ const Dashboard = () => {
 
 
   //state for displaying recent activity 
-  const [recent_lang,setrecent_lang] = useState("sdfsd")
-  const [recent_topic,setrecent_topic] = useState("dsfs")
+  const [recent_lang,setrecent_lang] = useState("No data")
+  const [recent_topic,setrecent_topic] = useState("No data")
 
   const navigate = useNavigate()
 
@@ -206,7 +206,7 @@ const Dashboard = () => {
             {/* Attempted Questions */}
             <div className="bg-gradient-to-br from-[#1E1E1E] to-[#3D3D3D] p-4 rounded-lg text-center shadow-md">
               <h3 className="text-xl font-semibold text-white">🔄 Attempted</h3>
-              <p className="text-4xl font-bold text-[#FF9800]">{attempted_question}</p>
+              <p className="text-4xl font-bold text-[#FF9800]">{attempted_question?(attempted_question):0 }</p>
             </div>
 
             {/* Success Rate */}
