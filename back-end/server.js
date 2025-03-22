@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: ["https://frontend-rho-gilt.vercel.app/"], credentials: true }));
 
 // Connect to Login Database
 // const logindb = mongoose.createConnection(process.env.MONGO_URI || 'mongodb://localhost:27017/login', {
