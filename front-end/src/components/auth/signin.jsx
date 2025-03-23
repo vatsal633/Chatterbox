@@ -38,13 +38,13 @@ const Signin = () => {
     }
 
     // Check if user already exists
-    if (localStorage.getItem(username)) {
-      // setError("Username already taken! Try a different one.");
-      return;
-    }
+    // if (localStorage.getItem(username)) {
+    //   // setError("Username already taken! Try a different one.");
+    //   return;
+    // }
 
     // Save user details in localStorage
-    localStorage.setItem(username, JSON.stringify({ username, email, password }));
+    // localStorage.setItem(username, JSON.stringify({ username, email, password }));
     
    
 
