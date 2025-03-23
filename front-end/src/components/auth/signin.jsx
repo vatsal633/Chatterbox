@@ -15,7 +15,6 @@ const Signin = () => {
     password: ""
   })
   
-  const API_URL = import.meta.env.REACT_APP_API_URL ||  "https://codequest-1obe.onrender.com"
 
   const handleChange = (e) => {
     setFormdata({ ...Formdata, [e.target.name]: e.target.value });
@@ -38,13 +37,13 @@ const Signin = () => {
     }
 
     // Check if user already exists
-    // if (localStorage.getItem(username)) {
-    //   // setError("Username already taken! Try a different one.");
-    //   return;
-    // }
+    if (localStorage.getItem(username)) {
+      // setError("Username already taken! Try a different one.");
+      return;
+    }
 
     // Save user details in localStorage
-    // localStorage.setItem(username, JSON.stringify({ username, email, password }));
+    localStorage.setItem(username, JSON.stringify({ username, email, password }));
     
    
 
@@ -53,7 +52,7 @@ const Signin = () => {
     //saving the data to the database
     
     try{
-      const response = await axios.post(`${API_URL}/api/auth/register`,Formdata)
+      const response = await axios.post("http://localhost:3000/api/auth/register",Formdata)
       console.log(response.data)
       setSuccess("Account created successfully! Redirecting...");
       setError("");
