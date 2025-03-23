@@ -15,6 +15,7 @@ const Signin = () => {
     password: ""
   })
   
+  const API_URL = import.meta.env.REACT_APP_API_URL
 
   const handleChange = (e) => {
     setFormdata({ ...Formdata, [e.target.name]: e.target.value });
@@ -52,7 +53,7 @@ const Signin = () => {
     //saving the data to the database
     
     try{
-      const response = await axios.post("http://localhost:3000/api/auth/register",Formdata)
+      const response = await axios.post(`${API_URL}/api/auth/register`,Formdata)
       console.log(response.data)
       setSuccess("Account created successfully! Redirecting...");
       setError("");
