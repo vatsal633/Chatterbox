@@ -4,8 +4,8 @@
   import Google from "../../assets/google.png";
   import Github from "../../assets/github.png";
   import axios from 'axios'
-
-  const API_URL = import.meta.env.REACT_APP_API_URL
+ 
+  const API_URL = import.meta.env.REACT_APP_API_URL || "https://codequest-1obe.onrender.com"
 
 
   const Login = () => {
