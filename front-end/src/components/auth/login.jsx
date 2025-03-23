@@ -5,6 +5,8 @@
   import Github from "../../assets/github.png";
   import axios from 'axios'
 
+  const API_URL = import.meta.env.REACT_APP_API_URL
+
 
   const Login = () => {
 
@@ -30,7 +32,7 @@
 
 
       try {
-        const response = await fetch(`http://localhost:3000/api/auth/user/${userData}`);
+        const response = await fetch(`${API_URL}/api/auth/user/${userData}`);
         
         if (!response.ok) {
           if (response.status === 404) {
