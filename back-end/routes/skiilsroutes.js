@@ -3,12 +3,7 @@ import mongoose from 'mongoose'
 import { skillsmodel } from '../models/skillsmodel.js'
 
 
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/skills', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-.then(() => { console.log("skill database connected") })
-.catch((err) => { console.log("error while connecting skill database", err) })
+
 
 const router = express.Router()
 

@@ -4,12 +4,7 @@ import mongoose from 'mongoose'
 
 const router = express.Router();
 
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/recentact',{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-.then(()=>{console.log("recentact database connected")})
-.catch((err)=>{console.log("error while connecting login database",err)})
+
 
 
 //this req called when user generate question

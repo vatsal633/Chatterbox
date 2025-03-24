@@ -5,11 +5,7 @@ const router = express.Router()
 
 
 //connect the mongodb
-mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/statistics', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => { console.log("userstate connect") })
-    .catch((err) => { console.log("error while connection userstate database", err) })
+
 
 
 //update states
