@@ -6,6 +6,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai"
 import axios from "axios";
 
 const CodeEditor = () => {
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const [code, setCode] = useState("");//store the code entered by user
   const { language } = useParams()//detect which lang user choosed from url
   const { username } = useParams();
@@ -83,7 +84,7 @@ const CodeEditor = () => {
       solved_question += 1
       console.log("🔍 Sending Request with:", { username, solved_question });
 
-      let response = await axios.post(`http://localhost:3000/states/${username}/update-states`, {
+      let response = await axios.post(`${BASE_URL}/states/${username}/update-states`, {
         username,
         solved_question
       });

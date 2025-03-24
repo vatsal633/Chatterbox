@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Dashboard = () => {
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const location = useLocation()
   const { username } = useParams()
   // const user_name = location.state?.username || "Guest";
@@ -62,9 +63,9 @@ const Dashboard = () => {
   useEffect(() => {
     async function fetch_data() {
       try {
-        let response = await axios.get(`http://localhost:3000/states/${username}/get-states`)
+        let response = await axios.get(`${BASE_URL}/states/${username}/get-states`)
 
-        let response2 = await axios.get(`http://localhost:3000/recent/${username}/get-recentact`)
+        let response2 = await axios.get(`${BASE_URL}/recent/${username}/get-recentact`)
 
         if (response.status === 200) {
           let userdata = response.data

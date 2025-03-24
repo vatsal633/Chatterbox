@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const Signin = () => {
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL
   const emailRef = useRef();
   const passRef = useRef();
   const userRef = useRef();
@@ -52,7 +53,7 @@ const Signin = () => {
     //saving the data to the database
     
     try{
-      const response = await axios.post("http://localhost:3000/api/auth/register",Formdata)
+      const response = await axios.post(`${BASE_URL}/api/auth/register`,Formdata)
       console.log(response.data)
       setSuccess("Account created successfully! Redirecting...");
       setError("");

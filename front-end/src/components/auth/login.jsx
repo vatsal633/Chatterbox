@@ -8,8 +8,8 @@
 
   const Login = () => {
 
+    const BASE_URL = import.meta.env.VITE_BACKEND_URL
     const [Error, setError] = useState(null);
-
     const emailRef = useRef();
     const passRef = useRef();
     const userRef = useRef();
@@ -30,7 +30,7 @@
 
 
       try {
-        const response = await fetch(`http://localhost:3000/api/auth/user/${userData}`);
+        const response = await fetch(`${BASE_URL}/api/auth/user/${userData}`);
         
         if (!response.ok) {
           if (response.status === 404) {

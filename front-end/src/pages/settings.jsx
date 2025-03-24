@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const Settings = () => {
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const sidebarRef = useRef();
@@ -36,7 +37,7 @@ const Settings = () => {
 
     async function fetchdata() {
       try {
-        let response = await axios.get(`http://localhost:3000/api/auth/user/${username}`);
+        let response = await axios.get(`${BASE_URL}/api/auth/user/${username}`);
         // console.log("userdata:",response.data)
 
         let email = response.data.email
@@ -57,7 +58,7 @@ const Settings = () => {
       // localStorage.setItem(username_ref.current.value,JSON.stringify(stored_name))
       let name = username
       let email = email_ref.current.value
-      let response = axios.put('http://localhost:3000/api/auth/update-name',{name,email});
+      let response = axios.put(`${BASE_URL}/api/auth/update-name`,{name,email});
 
 
     } catch (e) {
@@ -80,7 +81,7 @@ const Settings = () => {
 
 
 
-      const response = axios.put(`http://localhost:3000/api/auth/update-password`, {
+      const response = axios.put(`${BASE_URL}/api/auth/update-password`, {
         email: email_ref.current.value,
         oldpassword: old_password,
         newpassword: new_password

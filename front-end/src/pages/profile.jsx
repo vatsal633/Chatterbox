@@ -9,6 +9,7 @@ import Editsvg from '../assets/edit.svg';
 
 
 const Profile = () => {
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const { username } = useParams();
   const [skills, setSkills] = useState([]);
   const [newSkill, setNewSkill] = useState("");
@@ -28,7 +29,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserdata = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/auth/user/${username}`);
+        const response = await axios.get(`${BASE_URL}/api/auth/user/${username}`);
         setUserData(response.data);
         // console.log("Fetched User Data:", response.data);
         if (response.data.phone_num != null) {
@@ -72,7 +73,7 @@ const Profile = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        let res = await axios.get(`http://localhost:3000/api/${username}/getskill`)
+        let res = await axios.get(`${BASE_URL}/api/${username}/getskill`)
         // console.log(res.data.skills)
         if (res.data == null) {
           setSkills([])
@@ -128,7 +129,7 @@ const Profile = () => {
   // saving skiils to database
   const saveskilldb = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/api/addskill', { username, skills })
+      const response = await axios.post(`${BASE_URL}/api/addskill`, { username, skills })
 
       console.log(response.data)
 
@@ -141,7 +142,7 @@ const Profile = () => {
   //saving mobile in db
   const saveMobile = async () => {
     try {
-      let response = await axios.post(`http://localhost:3000/api/auth/add-phone`, { name: username, Phonenum })
+      let response = await axios.post(`${BASE_URL}/api/auth/add-phone`, { name: username, Phonenum })
 
       if (response.status === 200) {
         console.log("success")

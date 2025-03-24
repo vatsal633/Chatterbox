@@ -8,7 +8,7 @@ import axios from "axios";
 
 const LanguagePage = () => {
 
-
+    const BASE_URL = import.meta.env.VITE_BACKEND_URL;
     const { language } = useParams();
     const navigate = useNavigate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -49,7 +49,7 @@ const LanguagePage = () => {
         const updateAct = async () => {
 
             try {
-                let response = await axios.post(`http://localhost:3000/recent/update-recentact`, { username, language, topic })
+                let response = await axios.post(`${BASE_URL}/recent/update-recentact`, { username, language, topic })
 
                 console.log(response.data)
 
@@ -166,7 +166,7 @@ const LanguagePage = () => {
     //this function updates solvequestions in database when user click on solve buton
     const updateAttemptedQuestion = async () => {
         try {
-            let Response = await axios.post(`http://localhost:3000/states/${username}/update-attempt`)
+            let Response = await axios.post(`${BASE_URL}/states/${username}/update-attempt`)
 
 
         } catch (err) {
