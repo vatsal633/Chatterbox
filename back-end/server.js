@@ -15,7 +15,7 @@ const port = process.env.PORT || 3000;
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: ["https://codequest-p5w2.onrender.com"], // Replace with actual frontend URL
+  origin: ["https://codequest-phi.vercel.app"], // Allow Vercel frontend
   methods: "GET,POST,PUT,DELETE",
   credentials: true,
 }));
