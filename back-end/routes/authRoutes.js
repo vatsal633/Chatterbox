@@ -6,12 +6,6 @@ import dotenv from 'dotenv';
 const router = express.Router();
 dotenv.config()
 
-mongoose.connect(process.env.MONGO_URI,{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-    .then(() => { console.log("login database connected") })
-    .catch((err) => { console.log("error while connecting login database", err) })
 
 //get api for fetch data from database
 router.get('/user/:username', async (req, res) => {

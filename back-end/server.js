@@ -17,17 +17,19 @@ app.use(express.json());
 app.use(cors());
 
 // Connect to Login Database
-// const logindb = mongoose.createConnection(process.env.MONGO_URI || 'mongodb://localhost:27017/login', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => { console.log("login database connected") })
+  .catch((err) => { console.log("error while connecting login database", err) })
 
 
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/states', userstatistics);
-app.use('/recent',recentact)
-app.use('/api',skillsroute);
+app.use('/recent', recentact)
+app.use('/api', skillsroute);
 
 // Default Route
 app.get('/', (req, res) => {
