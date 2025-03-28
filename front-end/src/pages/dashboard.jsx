@@ -5,7 +5,7 @@ import { FaUserCircle, FaSignOutAlt, FaBars } from "react-icons/fa";
 import { Link, useLocation, useParams } from "react-router-dom";
 // import {Dashboard_nav} from '../components/dashboard_nav';
 import { useNavigate } from 'react-router-dom';
-
+import  Loader  from '../components/loader.jsx';
 
 const Dashboard = () => {
   const BASE_URL = import.meta.env.VITE_BACKEND_URL;
@@ -18,6 +18,7 @@ const Dashboard = () => {
   const [attempted_question,SetAttempted_question] = useState();
   const sidebarRef = useRef(null);
   const [width,Setwidth] = useState(0)// for sucess rate bar
+  const [Generate,setGenerate] = useState(true)
 
 
   //state for displaying recent activity 
@@ -73,6 +74,7 @@ const Dashboard = () => {
           Setsloved(userdata.solved_question)
           SetAttempted_question(userdata.attempted_question)
           Setwidth(userdata.success_rate)//set the sucess bar acording to success rate
+          setGenerate(false)
           
         }
 
@@ -115,7 +117,7 @@ const Dashboard = () => {
 
   // Handle click outside sidebar to close
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-black text-white">
+    <div className="flex relative flex-col md:flex-row min-h-screen bg-black text-white">
 
       {/* Mobile Navbar */}
       <div className="w-full bg-gray-900 p-4 flex justify-between items-center md:hidden">
@@ -227,6 +229,8 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+        {Generate
+        &&(<Loader/>)}
       </main>
     </div>
   );
