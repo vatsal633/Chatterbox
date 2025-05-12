@@ -2,28 +2,24 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv'
 import cors from 'cors';
+import authRoute from "./routes/authRoute.js"
+import connectDB from  "./config/db.js"
 
 
 dotenv.config();
 
 const app = express();
+connectDB()
 const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
 app.use(cors());
 
-// Connect to Login Database
-// mongoose.connect(process.env.MONGO_URI ||'mongodb://localhost:27017/', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// })
-//   .then(() => { console.log("login database connected") })
-//   .catch((err) => { console.log("error while connecting login database", err) })
 
 
 // Routes
-
+app.use("/api/auth",authRoute)
 
 // Default Route
 app.get('/', (req, res) => {
