@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom'
 const Navbar = () => {
     return (
         <nav className="flex justify-between items-center p-6 border-b border-gray-800">
+            <a href="/">
             <h1 className="text-2xl font-bold text-cyan-400">ChatterBox</h1>
+            </a>
             <div className="space-x-4">
                 <Link to="/login" className="text-gray-300 hover:text-white transition">
                     Login

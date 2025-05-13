@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from "axios"
+import { signinUser } from '../../apis/auth'; // api for signin
 
 const Signin = () => {
-    const [error,setError] = useState("")
+    const [error, setError] = useState("")
     const [formData, setFormData] = useState({
         username: "",
         email: "",
@@ -18,24 +20,19 @@ const Signin = () => {
         });
     };
 
+
     const handleSubmit = async (e) => {
+        e.preventDefault();
         try {
-            e.preventDefault();
             console.log(formData);
-
-            let response = await axios.post(`${BASEURL}/api/auth/signin`,formData,{
-                headers: { "Content-Type": "application/json" },
-            })
-
-            console.log(response.data)
-
+            const response = await signinUser(formData);
+            console.log('Sign In Success:', response);
         } catch (err) {
-            console.log(err)
-            if (err.response && err.response.status === 400) {
-                setError(err.response.data.message)
-            }
+            console.log('Sign In Error:', err);
+            setError(err.message);
         }
     };
+
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-[#0f0f0f] to-[#1f1f1f] flex items-center justify-center px-4">
@@ -105,7 +102,7 @@ const Signin = () => {
                 </form>
 
                 <p className="mt-6 text-center text-gray-400 text-sm">
-                    Already have an account? <span className="text-purple-400 hover:underline cursor-pointer">Login</span>
+                    Already have an account? <Link to='/login' className="text-purple-400 hover:underline cursor-pointer">Login</Link>
                 </p>
             </div>
         </div>

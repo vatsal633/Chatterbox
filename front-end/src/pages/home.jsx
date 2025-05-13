@@ -16,10 +16,10 @@ const HomePage = () => {
           Experience immersive, real-time conversations with AI mentors, teachers, and more. Now with voice, markdown, and emoji reactions!
         </p>
         <Link
-          to="/chat"
+          to="/signin"
           className="bg-cyan-500 hover:bg-cyan-600 text-lg px-6 py-3 rounded-lg transition shadow-lg"
         >
-          Start Chatting
+          Get Start
         </Link>
       </section>
 
